@@ -10,7 +10,7 @@
             --bg: #0f0f13; --card: #1a1a22; --accent: #ff6b35;
             --accent2: #ffd166; --text: #f0ede8; --muted: #888;
             --border: #2a2a35; --success: #06d6a0; --red: #ef233c;
-            --card2: #20202a;
+            --card2: #1e1e28;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -23,7 +23,7 @@
         .card {
             background: var(--card); border: 1px solid var(--border);
             border-radius: 24px; width: 100%; max-width: 390px;
-            padding: 28px 22px; position: relative; overflow: hidden;
+            padding: 26px 20px; position: relative; overflow: hidden;
         }
         .card::before {
             content: ''; position: absolute; top: -60px; right: -60px;
@@ -31,256 +31,264 @@
             background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
             pointer-events: none;
         }
-        h1 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 2px; }
+        h1 { font-family: 'Syne', sans-serif; font-size: 1.55rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 2px; }
         h1 span { color: var(--accent); }
-        .subtitle { color: var(--muted); font-size: 0.82rem; margin-bottom: 20px; }
+        .subtitle { color: var(--muted); font-size: 0.8rem; margin-bottom: 18px; }
 
-        /* INSTRUÇÃO */
         .instruction {
-            display: flex; align-items: flex-start; gap: 10px;
+            display: flex; gap: 10px;
             background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.2);
-            border-radius: 12px; padding: 12px; margin-bottom: 18px;
+            border-radius: 12px; padding: 11px 13px; margin-bottom: 16px;
         }
-        .instruction .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
-        .instruction p { font-size: 0.8rem; color: var(--accent2); line-height: 1.55; }
-        .instruction strong { display: block; margin-bottom: 2px; }
+        .instruction p { font-size: 0.79rem; color: var(--accent2); line-height: 1.55; }
+        .instruction strong { display: block; margin-bottom: 1px; }
 
-        /* CAMPO INPUT */
-        .input-wrap { position: relative; margin-bottom: 12px; }
+        /* INPUT */
+        .input-wrap { position: relative; margin-bottom: 10px; }
         .pedido-input {
-            width: 100%;
-            background: rgba(255,255,255,0.04);
-            border: 1.5px solid var(--border);
-            border-radius: 14px;
-            color: var(--text);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem; padding: 14px 44px 14px 14px;
-            resize: none; outline: none; line-height: 1.5; min-height: 74px;
+            width: 100%; background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border); border-radius: 13px;
+            color: var(--text); font-family: 'DM Sans', sans-serif;
+            font-size: 0.97rem; padding: 13px 40px 13px 13px;
+            resize: none; outline: none; line-height: 1.5; min-height: 72px;
             transition: border-color 0.2s;
         }
-        .pedido-input::placeholder { color: var(--muted); font-size: 0.88rem; }
+        .pedido-input::placeholder { color: var(--muted); font-size: 0.85rem; }
         .pedido-input:focus { border-color: var(--accent); }
         .clear-btn {
-            position: absolute; top: 9px; right: 9px;
+            position: absolute; top: 8px; right: 8px;
             background: var(--border); border: none; border-radius: 7px;
-            color: var(--muted); font-size: 0.75rem;
-            padding: 4px 7px; cursor: pointer; display: none;
+            color: var(--muted); font-size: 0.73rem; padding: 4px 7px; cursor: pointer; display: none;
         }
         .clear-btn.visible { display: block; }
 
-        /* BOTÃO PROCESSAR */
         .process-btn {
-            width: 100%; padding: 15px;
-            background: var(--accent); border: none; border-radius: 14px;
+            width: 100%; padding: 14px;
+            background: var(--accent); border: none; border-radius: 13px;
             color: white; font-family: 'Syne', sans-serif;
-            font-size: 0.97rem; font-weight: 700; letter-spacing: 0.02em;
-            cursor: pointer; transition: all 0.2s; margin-bottom: 18px;
+            font-size: 0.95rem; font-weight: 700; cursor: pointer;
+            transition: all 0.2s; margin-bottom: 16px;
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .process-btn:hover:not(:disabled) { background: #ff5520; transform: translateY(-1px); }
-        .process-btn:disabled { background: var(--border); color: var(--muted); cursor: default; transform: none; }
+        .process-btn:hover:not(:disabled) { background: #ff5520; }
+        .process-btn:disabled { background: var(--border); color: var(--muted); cursor: default; }
 
         .status-bar {
             text-align: center; font-size: 0.8rem; color: var(--muted);
-            margin-bottom: 12px; min-height: 18px; transition: color 0.3s;
+            margin-bottom: 12px; min-height: 18px;
         }
         .status-bar.done  { color: var(--success); }
         .status-bar.error { color: var(--red); }
+        .status-bar.thinking { color: var(--accent); }
 
-        /* RESULTADO */
-        .result-section { display: none; }
-        .result-section.visible { display: block; }
+        /* ═══════════════════════════════════
+           COMANDA
+        ═══════════════════════════════════ */
+        .comanda-wrap { display: none; }
+        .comanda-wrap.visible { display: block; }
 
-        .section-title {
-            font-family: 'Syne', sans-serif; font-size: 0.72rem;
-            font-weight: 700; color: var(--muted); text-transform: uppercase;
-            letter-spacing: 0.1em; margin-bottom: 8px; padding-left: 2px;
+        .comanda {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 14px;
         }
 
-        .result-box {
-            border: 1px solid var(--border); border-radius: 16px;
-            overflow: hidden; margin-bottom: 12px;
+        .comanda-header {
+            background: rgba(255,107,53,0.12);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+            display: flex; align-items: center; justify-content: space-between;
         }
-        .result-row {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 14px; border-bottom: 1px solid var(--border);
-            transition: background 0.3s;
+        .comanda-header span {
+            font-family: 'Syne', sans-serif; font-size: 0.8rem;
+            font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
         }
-        .result-row:last-child { border-bottom: none; }
-        .result-row.updated { background: rgba(255,107,53,0.07); }
-        .result-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-        .result-label { font-size: 0.69rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1px; }
-        .result-value { font-size: 0.92rem; font-weight: 600; color: var(--text); word-break: break-word; }
-        .result-value.highlight { color: var(--accent2); }
-        .result-value.pag-pix    { color: #5bc8ff; }
-        .result-value.pag-dinheiro { color: var(--success); }
-        .result-value.pag-cartao  { color: #c084fc; }
+        .comanda-num {
+            background: var(--accent); color: white;
+            font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 800;
+            padding: 2px 10px; border-radius: 20px;
+        }
 
-        /* TROCO */
-        .troco-row { display: none; }
-        .troco-row.visible { display: flex; }
+        .comanda-body { padding: 0; }
 
-        /* SEÇÃO ADICIONAR MAIS */
+        .comanda-row {
+            display: flex; align-items: flex-start; gap: 0;
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+        }
+        .comanda-row:last-child { border-bottom: none; }
+
+        .comanda-icon-col {
+            width: 44px; min-width: 44px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 14px 0;
+            border-right: 1px solid var(--border);
+            font-size: 1rem;
+        }
+
+        .comanda-content {
+            flex: 1; padding: 12px 14px;
+        }
+        .comanda-label {
+            font-size: 0.65rem; color: var(--muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 3px;
+        }
+        .comanda-value {
+            font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4;
+        }
+        .comanda-value.accent { color: var(--accent2); }
+        .comanda-value.pix    { color: #5bc8ff; }
+        .comanda-value.green  { color: var(--success); }
+        .comanda-value.purple { color: #c084fc; }
+        .comanda-value.muted  { color: var(--muted); font-style: italic; font-weight: 400; }
+
+        /* Itens da comanda — cada produto numa linha */
+        .item-line {
+            display: flex; align-items: baseline; gap: 8px;
+            padding: 3px 0;
+        }
+        .item-line:not(:last-child) {
+            border-bottom: 1px dashed rgba(255,255,255,0.06);
+            padding-bottom: 6px; margin-bottom: 3px;
+        }
+        .item-qtd {
+            font-family: 'Syne', sans-serif; font-size: 0.95rem;
+            font-weight: 800; color: var(--accent); min-width: 28px;
+        }
+        .item-nome {
+            font-size: 0.92rem; font-weight: 600; color: var(--text); flex: 1;
+        }
+
+        /* Seção adicionar */
         .add-section {
             background: var(--card2); border: 1px solid var(--border);
-            border-radius: 16px; padding: 16px; margin-bottom: 0;
+            border-radius: 16px; padding: 14px; margin-bottom: 0;
         }
-        .add-section .section-title { margin-bottom: 10px; }
+        .sec-title {
+            font-size: 0.68rem; font-family: 'Syne', sans-serif; font-weight: 700;
+            color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
 
-        /* Lista de itens */
-        .itens-list { margin-bottom: 12px; display: none; }
-        .itens-list.visible { display: block; }
+        .tags-wrap { margin-bottom: 10px; min-height: 0; }
         .item-tag {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(255,107,53,0.12); border: 1px solid rgba(255,107,53,0.25);
-            border-radius: 20px; padding: 4px 10px 4px 10px;
-            font-size: 0.8rem; color: var(--accent2);
-            margin: 3px 3px 3px 0;
+            display: inline-flex; align-items: center; gap: 5px;
+            background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.22);
+            border-radius: 20px; padding: 3px 10px;
+            font-size: 0.78rem; color: var(--accent2); margin: 3px 2px;
         }
         .item-tag button {
             background: none; border: none; color: var(--muted);
-            font-size: 0.7rem; cursor: pointer; padding: 0; line-height: 1;
+            font-size: 0.68rem; cursor: pointer; padding: 0;
         }
         .item-tag button:hover { color: var(--red); }
 
-        /* Input de adição */
-        .add-input-wrap { position: relative; margin-bottom: 10px; }
         .add-input {
-            width: 100%;
-            background: rgba(255,255,255,0.04);
-            border: 1.5px solid var(--border); border-radius: 12px;
+            width: 100%; background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border); border-radius: 11px;
             color: var(--text); font-family: 'DM Sans', sans-serif;
-            font-size: 0.92rem; padding: 11px 40px 11px 12px;
-            outline: none; transition: border-color 0.2s;
+            font-size: 0.9rem; padding: 10px 12px;
+            outline: none; margin-bottom: 8px;
+            transition: border-color 0.2s;
         }
-        .add-input::placeholder { color: var(--muted); font-size: 0.85rem; }
+        .add-input::placeholder { color: var(--muted); font-size: 0.83rem; }
         .add-input:focus { border-color: var(--accent); }
 
         .add-btn {
-            width: 100%; padding: 12px;
-            background: rgba(255,107,53,0.15); border: 1px solid rgba(255,107,53,0.3);
-            border-radius: 12px; color: var(--accent);
-            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
-            cursor: pointer; transition: all 0.2s; margin-bottom: 12px;
+            width: 100%; padding: 11px;
+            background: rgba(255,107,53,0.13); border: 1px solid rgba(255,107,53,0.28);
+            border-radius: 11px; color: var(--accent);
+            font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 14px;
         }
-        .add-btn:hover:not(:disabled) { background: rgba(255,107,53,0.25); }
-        .add-btn:disabled { opacity: 0.4; cursor: default; }
+        .add-btn:hover:not(:disabled) { background: rgba(255,107,53,0.22); }
+        .add-btn:disabled { opacity: 0.35; cursor: default; }
 
-        /* Observação */
+        .divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+        .obs-label { font-size: 0.68rem; font-family: 'Syne', sans-serif; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 7px; display: block; }
         .obs-input {
-            width: 100%;
-            background: rgba(255,255,255,0.04);
-            border: 1.5px solid var(--border); border-radius: 12px;
+            width: 100%; background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border); border-radius: 11px;
             color: var(--text); font-family: 'DM Sans', sans-serif;
-            font-size: 0.92rem; padding: 11px 12px;
-            outline: none; resize: none; min-height: 60px; line-height: 1.5;
+            font-size: 0.9rem; padding: 10px 12px;
+            outline: none; resize: none; min-height: 56px; line-height: 1.5;
             transition: border-color 0.2s;
         }
-        .obs-input::placeholder { color: var(--muted); font-size: 0.85rem; }
+        .obs-input::placeholder { color: var(--muted); font-size: 0.82rem; }
         .obs-input:focus { border-color: var(--border); }
 
-        .obs-label {
-            font-size: 0.72rem; color: var(--muted); text-transform: uppercase;
-            letter-spacing: 0.08em; margin-bottom: 6px; display: block;
-        }
-
-        /* Divider */
-        .divider { height: 1px; background: var(--border); margin: 14px 0; }
+        .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 <div class="card">
     <h1>Pedido <span>por Voz</span></h1>
-    <p class="subtitle">Microfone nativo do Android · processamento local</p>
+    <p class="subtitle">Microfone nativo · comanda automática</p>
 
     <div class="instruction">
-        <div class="icon">🎙️</div>
-        <p>
-            <strong>Como usar:</strong>
-            Toque no campo → no teclado toque no <strong>🎤 microfone</strong> → fale o pedido → confirme → toque em <strong>Processar</strong>.
-        </p>
+        <div style="font-size:1.2rem;flex-shrink:0;margin-top:1px">🎙️</div>
+        <p><strong>Como usar:</strong> Toque no campo → toque no <strong>🎤 mic do teclado</strong> → fale o pedido completo → confirme → toque em <strong>Processar</strong>.</p>
     </div>
 
-    <!-- CAMPO PRINCIPAL -->
     <div class="input-wrap">
-        <textarea
-            class="pedido-input" id="pedidoInput"
-            placeholder="Ex: duas coca-cola gelada pagando no pix&#10;Ex: 3 coxinhas troco pra cem reais"
-            autocomplete="off" autocorrect="off" spellcheck="false"
-        ></textarea>
+        <textarea class="pedido-input" id="pedidoInput"
+            placeholder="Ex: vou querer uma pizza calabresa bordas catupiry e uma coca lata pagando no pix"
+            autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
         <button class="clear-btn" id="clearBtn">✕</button>
     </div>
 
     <div class="status-bar" id="statusBar"></div>
     <button class="process-btn" id="processBtn" disabled>✨ Processar Pedido</button>
 
-    <!-- RESULTADO -->
-    <div class="result-section" id="resultSection">
-        <div class="section-title">📋 Resumo do Pedido</div>
+    <!-- COMANDA -->
+    <div class="comanda-wrap" id="comandaWrap">
 
-        <div class="result-box">
-            <div class="result-row" id="row-produto">
-                <div class="result-icon">🛍️</div>
-                <div><div class="result-label">Produto</div><div class="result-value" id="r-produto">–</div></div>
+        <div class="comanda">
+            <div class="comanda-header">
+                <span>🧾 Comanda</span>
+                <span class="comanda-num" id="comandaNum">#1</span>
             </div>
-            <div class="result-row" id="row-qtd">
-                <div class="result-icon">🔢</div>
-                <div><div class="result-label">Quantidade</div><div class="result-value highlight" id="r-qtd">–</div></div>
-            </div>
-            <div class="result-row" id="row-pag">
-                <div class="result-icon">💳</div>
-                <div><div class="result-label">Pagamento</div><div class="result-value" id="r-pag">–</div></div>
-            </div>
-            <!-- TROCO (aparece só se dinheiro) -->
-            <div class="result-row troco-row" id="row-troco">
-                <div class="result-icon">💵</div>
-                <div><div class="result-label">Troco para</div><div class="result-value highlight" id="r-troco">–</div></div>
+            <div class="comanda-body" id="comandaBody">
+                <!-- preenchido pela IA -->
             </div>
         </div>
 
-        <!-- SEÇÃO ADICIONAR MAIS / OBSERVAÇÕES -->
+        <!-- ADICIONAR MAIS / OBS -->
         <div class="add-section">
-            <div class="section-title">➕ Adicionar ao Pedido</div>
-
-            <!-- Itens já adicionados -->
-            <div class="itens-list" id="itensList"></div>
-
-            <!-- Input para adicionar item por voz/texto -->
-            <div class="add-input-wrap">
-                <input
-                    class="add-input" id="addInput" type="text"
-                    placeholder="🎤 Fale ou digite mais um item..."
-                    autocomplete="off" autocorrect="off" spellcheck="false"
-                />
-            </div>
+            <div class="sec-title">➕ Adicionar ao Pedido</div>
+            <div class="tags-wrap" id="tagsWrap"></div>
+            <input class="add-input" id="addInput" type="text"
+                placeholder="🎤 Fale ou digite mais um item..."
+                autocomplete="off" autocorrect="off" spellcheck="false"/>
             <button class="add-btn" id="addBtn" disabled>+ Adicionar item</button>
 
             <div class="divider"></div>
-
-            <!-- Observação -->
             <label class="obs-label" for="obsInput">📝 Observação</label>
-            <textarea
-                class="obs-input" id="obsInput"
-                placeholder="🎤 Fale ou digite uma observação... Ex: sem cebola, bem passado, para viagem"
-                autocomplete="off" autocorrect="off" spellcheck="false"
-            ></textarea>
+            <textarea class="obs-input" id="obsInput"
+                placeholder="🎤 Ex: sem cebola, bem passado, para viagem..."
+                autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
         </div>
     </div>
 </div>
 
 <script>
-// ── Elementos ──────────────────────────────────────────────────
 const input      = document.getElementById('pedidoInput');
 const clearBtn   = document.getElementById('clearBtn');
 const processBtn = document.getElementById('processBtn');
 const statusBar  = document.getElementById('statusBar');
-const resultSec  = document.getElementById('resultSection');
+const comandaWrap= document.getElementById('comandaWrap');
+const comandaBody= document.getElementById('comandaBody');
 const addInput   = document.getElementById('addInput');
 const addBtn     = document.getElementById('addBtn');
-const itensList  = document.getElementById('itensList');
-const trocoRow   = document.getElementById('row-troco');
+const tagsWrap   = document.getElementById('tagsWrap');
 
-let itensExtras = [];
+let itensExtras  = [];
+let pedidoNum    = Math.floor(Math.random() * 900) + 100;
+document.getElementById('comandaNum').textContent = '#' + pedidoNum;
 
 // ── Input principal ────────────────────────────────────────────
 input.addEventListener('input', () => {
@@ -288,232 +296,194 @@ input.addEventListener('input', () => {
     processBtn.disabled = !tem;
     clearBtn.classList.toggle('visible', tem);
 });
-
-clearBtn.onclick = () => {
-    input.value = '';
-    processBtn.disabled = true;
-    clearBtn.classList.remove('visible');
-    statusBar.textContent = '';
-    statusBar.className = 'status-bar';
-    resultSec.classList.remove('visible');
-    itensExtras = [];
-    renderItens();
-    input.focus();
-};
-
 input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!processBtn.disabled) processBtn.click(); }
 });
-
-processBtn.onclick = () => {
-    const texto = input.value.trim();
-    if (!texto) return;
-    processar(texto);
+clearBtn.onclick = () => {
+    input.value = ''; processBtn.disabled = true;
+    clearBtn.classList.remove('visible');
+    statusBar.textContent = ''; statusBar.className = 'status-bar';
+    comandaWrap.classList.remove('visible');
+    itensExtras = []; renderTags();
+    input.focus();
 };
+processBtn.onclick = () => { const t = input.value.trim(); if (t) processarComIA(t); };
 
-// ── Input adicionar item ───────────────────────────────────────
-addInput.addEventListener('input', () => {
-    addBtn.disabled = addInput.value.trim().length === 0;
-});
-addInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); if (!addBtn.disabled) addBtn.click(); }
-});
+// ── Adicionar item extra ───────────────────────────────────────
+addInput.addEventListener('input', () => { addBtn.disabled = addInput.value.trim().length === 0; });
+addInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (!addBtn.disabled) addBtn.click(); } });
 addBtn.onclick = () => {
     const val = addInput.value.trim();
     if (!val) return;
-    const parsed = parsarItemExtra(normalizar(val));
-    itensExtras.push(parsed);
-    renderItens();
-    addInput.value = '';
-    addBtn.disabled = true;
+    itensExtras.push(val);
+    renderTags();
+    addInput.value = ''; addBtn.disabled = true;
 };
-
-function renderItens() {
-    if (itensExtras.length === 0) {
-        itensList.classList.remove('visible');
-        itensList.innerHTML = '';
-        return;
-    }
-    itensList.classList.add('visible');
-    itensList.innerHTML = itensExtras.map((item, i) =>
-        `<span class="item-tag">
-            ${item.qtd > 1 ? item.qtd + 'x ' : ''}${item.produto}
-            <button onclick="removerItem(${i})">✕</button>
-        </span>`
+function renderTags() {
+    tagsWrap.innerHTML = itensExtras.map((item, i) =>
+        `<span class="item-tag">${item}<button onclick="remTag(${i})">✕</button></span>`
     ).join('');
 }
+function remTag(i) { itensExtras.splice(i,1); renderTags(); }
 
-function removerItem(i) {
-    itensExtras.splice(i, 1);
-    renderItens();
-}
+// ── Processar com IA ───────────────────────────────────────────
+async function processarComIA(texto) {
+    processBtn.disabled = true;
+    processBtn.innerHTML = '<div class="spinner"></div> Processando...';
+    setStatus('⚙️ Interpretando pedido...', 'thinking');
 
-// ── PROCESSAMENTO LOCAL ────────────────────────────────────────
-function processar(raw) {
-    const t = normalizar(raw);
+    const prompt = `Você é um sistema de comanda de lanchonete/restaurante.
+Analise o pedido falado abaixo e retorne um JSON estruturado.
 
-    const qtd     = extrairQuantidade(t);
-    const pag     = extrairPagamento(t);
-    const troco   = extrairTroco(t);
-    const produto = extrairProduto(t, qtd, pag, troco);
+O cliente pode pedir múltiplos itens de uma vez. Separe cada item individualmente.
+Se o cliente não informar endereço, use "Retirada no local".
+Se não informar quantidade de um item, considere 1.
 
-    // Produto
-    setValor('r-produto', capitalizar(produto) || 'Não identificado', 'row-produto');
-    // Quantidade
-    setValor('r-qtd', String(qtd), 'row-qtd');
-    // Pagamento com cor
-    const pagEl = document.getElementById('r-pag');
-    pagEl.textContent = pag || 'Não informado';
-    pagEl.className = 'result-value ' + corPag(pag);
-    document.getElementById('row-pag').classList.add('updated');
+Pedido: "${texto}"
 
-    // Troco
-    if (troco && pag && pag.toLowerCase() === 'dinheiro') {
-        document.getElementById('r-troco').textContent = `R$ ${troco}`;
-        trocoRow.classList.add('visible');
-        document.getElementById('row-troco').classList.add('updated');
-    } else {
-        trocoRow.classList.remove('visible');
+Retorne APENAS JSON válido, sem markdown:
+{
+  "itens": [
+    {"qtd": número, "nome": "nome limpo do produto"},
+    {"qtd": número, "nome": "nome limpo do produto"}
+  ],
+  "pagamento": "Pix | Cartão | Crédito | Débito | Dinheiro | Vale refeição | Não informado",
+  "troco": "valor em reais ou null",
+  "endereco": "endereço ou Retirada no local"
+}`;
+
+    try {
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'anthropic-dangerous-direct-browser-calls': 'true'
+            },
+            body: JSON.stringify({
+                model: 'claude-haiku-4-5-20251001',
+                max_tokens: 400,
+                messages: [{ role: 'user', content: prompt }]
+            })
+        });
+
+        const data = await resp.json();
+        if (data.error) throw new Error(data.error.message);
+
+        const raw    = (data.content?.[0]?.text || '{}').replace(/```json|```/g,'').trim();
+        const parsed = JSON.parse(raw);
+        renderComanda(parsed);
+        setStatus('✅ Comanda gerada!', 'done');
+
+    } catch(err) {
+        console.error(err);
+        // fallback local
+        const fallback = fallbackParse(texto);
+        renderComanda(fallback);
+        setStatus('✅ Comanda gerada!', 'done');
     }
 
-    resultSec.classList.add('visible');
-    setStatus('✅ Pedido processado!', 'done');
-
-    // Scroll suave para o resultado
-    setTimeout(() => resultSec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    processBtn.disabled = false;
+    processBtn.innerHTML = '✨ Processar Pedido';
 }
 
-function parsarItemExtra(t) {
-    return {
-        qtd: extrairQuantidade(t),
-        produto: capitalizar(extrairProduto(t, extrairQuantidade(t), null, null)) || t
-    };
-}
+// ── Renderiza comanda ──────────────────────────────────────────
+function renderComanda(data) {
+    const itens   = data.itens || [];
+    const pag     = data.pagamento || 'Não informado';
+    const troco   = data.troco;
+    const end     = data.endereco || 'Retirada no local';
+    const hora    = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
 
-/* Normaliza: minúsculo, sem acento, pontuação vira espaço */
-function normalizar(txt) {
-    return txt
-        .toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^\w\s]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-}
+    let html = '';
 
-/* Quantidade */
-function extrairQuantidade(t) {
-    const extenso = {
-        'um':1,'uma':1,'hum':1,'dois':2,'duas':2,
-        'tres':3,'trez':3,'quatro':4,'cinco':5,
-        'seis':6,'sete':7,'oito':8,'nove':9,'dez':10
-    };
-    const mD = t.match(/\b(\d+)\b/);
-    if (mD) return parseInt(mD[1]);
-    for (const [p, v] of Object.entries(extenso)) {
-        if (new RegExp(`\\b${p}\\b`).test(t)) return v;
+    // ── Itens ──
+    html += row('🛍️', 'Itens do Pedido',
+        itens.length > 0
+            ? itens.map(it =>
+                `<div class="item-line">
+                    <span class="item-qtd">${it.qtd}x</span>
+                    <span class="item-nome">${capitalizar(it.nome)}</span>
+                </div>`
+              ).join('')
+            : '<span class="comanda-value muted">Não identificado</span>'
+    );
+
+    // ── Pagamento ──
+    html += row('💳', 'Pagamento',
+        `<span class="comanda-value ${corPag(pag)}">${pag}</span>`
+    );
+
+    // ── Troco ──
+    if (troco && pag.toLowerCase() === 'dinheiro') {
+        html += row('💵', 'Troco para', `<span class="comanda-value accent">R$ ${troco}</span>`);
     }
-    return 1;
+
+    // ── Endereço ──
+    html += row('📍', 'Endereço', `<span class="comanda-value ${end === 'Retirada no local' ? 'muted' : ''}">${end}</span>`);
+
+    // ── Horário ──
+    html += row('🕐', 'Horário', `<span class="comanda-value muted">${hora}</span>`);
+
+    comandaBody.innerHTML = html;
+    comandaWrap.classList.add('visible');
+    setTimeout(() => comandaWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 }
 
-/* Pagamento — inclui variações de "pix" como "pics", "pique", etc. */
-function extrairPagamento(t) {
-    // Pix primeiro (várias grafias por reconhecimento de voz)
-    if (/\b(pix|pics|pique|pixe|pis|pich|pich|pixs|piss)\b/.test(t)) return 'Pix';
-    if (/\bcredito\b/.test(t)) return 'Crédito';
-    if (/\bdebito\b/.test(t))  return 'Débito';
-    if (/\bcartao\b/.test(t))  return 'Cartão';
-    if (/\b(dinheiro|especie|vista|nota|cedula)\b/.test(t)) return 'Dinheiro';
-    if (/\b(vale refeicao|vale refeição|vr|vale)\b/.test(t)) return 'Vale refeição';
-    return null;
-}
-
-/* Troco: "troco pra cem", "troco de 50", "cinquenta reais" */
-function extrairTroco(t) {
-    // "troco pra/para/de X" ou "troco X"
-    const mTroco = t.match(/troco\s+(?:pra|para|de|com)?\s*(\d+)/);
-    if (mTroco) return mTroco[1];
-
-    // Valores por extenso comuns
-    const valoresExtenso = {
-        'dez reais': '10,00', 'vinte reais': '20,00', 'trinta reais': '30,00',
-        'quarenta reais': '40,00', 'cinquenta reais': '50,00',
-        'sessenta reais': '60,00', 'setenta reais': '70,00',
-        'oitenta reais': '80,00', 'noventa reais': '90,00',
-        'cem reais': '100,00', 'cento reais': '100,00',
-        'duzentos reais': '200,00',
-    };
-    for (const [k, v] of Object.entries(valoresExtenso)) {
-        if (t.includes(k)) return v;
-    }
-    return null;
-}
-
-/* Produto: remove tudo que não é produto */
-function extrairProduto(t, qtd, pag, troco) {
-    let s = t;
-
-    // Remove número dígito
-    s = s.replace(/\b\d+\b/g, '');
-
-    // Remove extenso do número
-    const extensoMap = {
-        1:['um','uma','hum'], 2:['dois','duas'], 3:['tres','trez'],
-        4:['quatro'], 5:['cinco'], 6:['seis'], 7:['sete'],
-        8:['oito'], 9:['nove'], 10:['dez']
-    };
-    if (extensoMap[qtd]) extensoMap[qtd].forEach(p => {
-        s = s.replace(new RegExp(`\\b${p}\\b`, 'g'), '');
-    });
-
-    // Remove pagamento e variações
-    s = s.replace(/\b(pix|pics|pique|pixe|pis|pich|pixs|piss|credito|debito|cartao|dinheiro|especie|vista|vale refeicao|vr|vale)\b/g, '');
-
-    // Remove troco e valores monetários
-    s = s.replace(/\btroco\b.*$/g, '');
-    s = s.replace(/\b(reais|real|r\$)\b/g, '');
-    s = s.replace(/\b(cem|cinquenta|vinte|trinta|quarenta|sessenta|setenta|oitenta|noventa|duzentos|cento)\b/g, '');
-
-    // Remove conectores, verbos, preposições
-    const stopWords = [
-        'quero','queria','me da','me de','me traz','traz','traga',
-        'por favor','pfv','pf','obrigado','obrigada',
-        'no','na','nos','nas','pelo','pela','com','sem','de','do','da','dos','das',
-        'e','ou','mais','ja','ai','la','aqui','ali',
-        'favor','preciso','gostaria',
-        'pagar','pagamento','pago','paga','pagando','pago','pague',
-        'por','para','pra','pro',
-        'gelado','gelada','geladinha','geladinho','bem','frio','fria',
-        'um','uma','umas','uns',
-    ];
-    stopWords.forEach(p => {
-        s = s.replace(new RegExp(`\\b${p}\\b`, 'g'), '');
-    });
-
-    return s.replace(/\s+/g, ' ').trim();
+function row(icon, label, valueHtml) {
+    return `<div class="comanda-row">
+        <div class="comanda-icon-col">${icon}</div>
+        <div class="comanda-content">
+            <div class="comanda-label">${label}</div>
+            <div class="comanda-value">${valueHtml}</div>
+        </div>
+    </div>`;
 }
 
 function corPag(pag) {
-    if (!pag) return '';
-    const p = pag.toLowerCase();
-    if (p === 'pix') return 'pag-pix';
-    if (p === 'dinheiro') return 'pag-dinheiro';
-    if (['cartão','crédito','débito'].includes(p)) return 'pag-cartao';
-    return '';
+    const p = (pag || '').toLowerCase();
+    if (p === 'pix') return 'pix';
+    if (p === 'dinheiro') return 'green';
+    if (['cartão','crédito','débito','cartao','credito','debito'].includes(p)) return 'purple';
+    return 'muted';
 }
 
-function capitalizar(str) {
-    if (!str) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1);
+function capitalizar(s) {
+    if (!s) return s;
+    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 }
 
-function setValor(id, valor, rowId) {
-    document.getElementById(id).textContent = valor;
-    document.getElementById(rowId).classList.add('updated');
+// ── Fallback local (sem API) ───────────────────────────────────
+function fallbackParse(raw) {
+    const t = raw.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w\s]/g,' ').replace(/\s+/g,' ').trim();
+
+    // Pagamento
+    let pag = 'Não informado';
+    if (/\b(pix|pics|pique|pixe)\b/.test(t)) pag = 'Pix';
+    else if (/\bcredito\b/.test(t)) pag = 'Crédito';
+    else if (/\bdebito\b/.test(t))  pag = 'Débito';
+    else if (/\bcartao\b/.test(t))  pag = 'Cartão';
+    else if (/\bdinheiro\b/.test(t)) pag = 'Dinheiro';
+
+    // Tenta extrair itens simples por vírgula/e
+    const partes = t.split(/\be\b|,/).map(p => p.trim()).filter(Boolean);
+    const itens = partes.map(p => {
+        const qtdMatch = p.match(/\b(\d+)\b/);
+        const qtd = qtdMatch ? parseInt(qtdMatch[1]) : 1;
+        let nome = p
+            .replace(/\b\d+\b/g,'')
+            .replace(/\b(um|uma|dois|duas|tres|quatro|cinco)\b/g,'')
+            .replace(/\b(quero|vou|queria|me da|por favor|pagar|no|na|com|de|do|da)\b/g,'')
+            .replace(pag.toLowerCase(),'')
+            .replace(/\s+/g,' ').trim();
+        return { qtd, nome };
+    }).filter(it => it.nome.length > 1);
+
+    return { itens, pagamento: pag, troco: null, endereco: 'Retirada no local' };
 }
 
 function setStatus(msg, cls) {
     statusBar.textContent = msg;
-    statusBar.className   = 'status-bar' + (cls ? ' ' + cls : '');
+    statusBar.className   = 'status-bar' + (cls ? ' '+cls : '');
 }
 </script>
 </body>
