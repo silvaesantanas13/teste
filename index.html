@@ -33,41 +33,66 @@
         h1 { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
         h1 span { color: var(--accent); }
         .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 28px; }
-        .mic-area { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 12px; }
+
+        .mic-area { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 24px; }
         .mic-btn {
-            width: 90px; height: 90px; border-radius: 50%;
+            width: 96px; height: 96px; border-radius: 50%;
             border: 2px solid var(--border); background: var(--bg); color: var(--text);
-            font-size: 36px; cursor: pointer; transition: all 0.2s;
+            font-size: 38px; cursor: pointer; transition: all 0.2s;
             display: flex; align-items: center; justify-content: center;
+            -webkit-tap-highlight-color: transparent;
         }
         .mic-btn:hover { border-color: var(--accent); transform: scale(1.05); }
         .mic-btn.recording { background: var(--red); border-color: var(--red); animation: pulse 1.2s infinite; }
-        .mic-btn.loading   { background: var(--accent); border-color: var(--accent); }
+        .mic-btn.loading   { background: var(--accent); border-color: var(--accent); animation: none; }
         @keyframes pulse {
             0%,100% { box-shadow: 0 0 0 0 rgba(239,35,60,0.4); }
-            50%     { box-shadow: 0 0 0 14px rgba(239,35,60,0); }
+            50%     { box-shadow: 0 0 0 16px rgba(239,35,60,0); }
         }
         .status-pill {
             background: var(--border); border-radius: 20px;
-            padding: 6px 16px; font-size: 0.8rem; font-weight: 500;
-            color: var(--muted); transition: all 0.3s;
+            padding: 7px 18px; font-size: 0.82rem; font-weight: 500;
+            color: var(--muted); transition: all 0.3s; text-align: center;
         }
         .status-pill.active   { background: rgba(239,35,60,0.15); color: var(--red); }
         .status-pill.done     { background: rgba(6,214,160,0.15);  color: var(--success); }
         .status-pill.thinking { background: rgba(255,107,53,0.15); color: var(--accent); }
-        .timer-row {
-            display: flex; justify-content: space-between;
-            font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; min-height: 16px;
+
+        /* Timer de gravação */
+        .rec-timer {
+            font-size: 2rem; font-family: 'Syne', sans-serif; font-weight: 700;
+            color: var(--red); letter-spacing: 0.05em;
+            min-height: 2.5rem; display: flex; align-items: center; justify-content: center;
         }
-        .silence-bar { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 18px; overflow: hidden; }
-        .silence-fill { height: 100%; background: var(--accent2); width: 0%; transition: width 0.1s linear; }
+        .rec-timer.hidden { visibility: hidden; }
+
+        /* Waveform bars */
+        .wave { display: flex; align-items: center; gap: 4px; height: 32px; margin: 4px 0; }
+        .wave span {
+            display: inline-block; width: 4px; border-radius: 3px;
+            background: var(--red); height: 6px;
+            transition: height 0.1s;
+        }
+        .wave.active span { animation: bar 0.6s ease-in-out infinite alternate; }
+        .wave.active span:nth-child(1) { animation-delay: 0.0s; }
+        .wave.active span:nth-child(2) { animation-delay: 0.1s; }
+        .wave.active span:nth-child(3) { animation-delay: 0.2s; }
+        .wave.active span:nth-child(4) { animation-delay: 0.3s; }
+        .wave.active span:nth-child(5) { animation-delay: 0.2s; }
+        .wave.active span:nth-child(6) { animation-delay: 0.1s; }
+        .wave.active span:nth-child(7) { animation-delay: 0.0s; }
+        @keyframes bar { from { height: 4px; } to { height: 28px; } }
+
+        /* Transcrição */
         .transcript-box {
             background: rgba(255,255,255,0.03); border: 1px solid var(--border);
             border-radius: 12px; padding: 14px; margin-bottom: 20px;
-            min-height: 56px; max-height: 110px; overflow-y: auto;
-            font-size: 0.88rem; color: var(--muted); font-style: italic; line-height: 1.5;
+            min-height: 52px; max-height: 100px; overflow-y: auto;
+            font-size: 0.9rem; color: var(--muted); font-style: italic; line-height: 1.5;
         }
         .transcript-box.has-text { color: var(--text); font-style: normal; }
+
+        /* Resultado */
         .result-box { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
         .result-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
         .result-row:last-child { border-bottom: none; }
@@ -75,25 +100,29 @@
         .result-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
         .result-value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
         .result-value.highlight { color: var(--accent2); }
+
         .spinner { width: 22px; height: 22px; border: 2px solid rgba(255,255,255,0.2); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        .hint { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 16px; opacity: 0.6; }
     </style>
 </head>
 <body>
 <div class="card">
     <h1>Pedido <span>por Voz</span></h1>
-    <p class="subtitle">Fale o produto, quantidade e pagamento</p>
+    <p class="subtitle">Grave o pedido — a IA transcreve e interpreta</p>
 
     <div class="mic-area">
         <button class="mic-btn" id="btn">🎤</button>
-        <div class="status-pill" id="status">Toque para falar</div>
-    </div>
 
-    <div class="timer-row">
-        <span id="totalTimer"></span>
-        <span id="silenceLbl"></span>
+        <div class="wave" id="wave">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="rec-timer hidden" id="recTimer">00:00</div>
+        <div class="status-pill" id="status">Toque para gravar</div>
     </div>
-    <div class="silence-bar"><div class="silence-fill" id="silenceFill"></div></div>
 
     <div class="transcript-box" id="transcript">O que você disser aparecerá aqui...</div>
 
@@ -111,239 +140,195 @@
             <div><div class="result-label">Pagamento</div><div class="result-value" id="r-pag">–</div></div>
         </div>
     </div>
+
+    <p class="hint">Segure para gravar · Toque novamente para parar · Máx 60s</p>
 </div>
 
 <script>
-/*
-  SOLUÇÃO DEFINITIVA PARA DUPLICATAS NO ANDROID
-  -----------------------------------------------
-  O Android fecha e reabre o reconhecedor automaticamente (onend dispara).
-  Ao reabrir, resultIndex volta a 0 — mas os resultados antigos da sessão
-  anterior são reportados de novo no próximo onresult.
+const btn        = document.getElementById('btn');
+const statusEl   = document.getElementById('status');
+const waveEl     = document.getElementById('wave');
+const timerEl    = document.getElementById('recTimer');
+const transcript = document.getElementById('transcript');
 
-  Abordagem: usamos um SET de fingerprints (hash da frase normalizada).
-  Cada frase final NOVA só entra na lista se ainda não estiver no Set.
-  Frases repetidas de sessões reiniciadas são silenciosamente ignoradas.
-*/
+let mediaRecorder = null;
+let audioChunks   = [];
+let gravando      = false;
+let timerIv       = null;
+let totalSecs     = 0;
+const MAX_SECS    = 60;
 
-const btn          = document.getElementById('btn');
-const statusEl     = document.getElementById('status');
-const transcriptEl = document.getElementById('transcript');
-const silenceFill  = document.getElementById('silenceFill');
-const totalTimerEl = document.getElementById('totalTimer');
-const silenceLbl   = document.getElementById('silenceLbl');
+// ── Iniciar gravação ──────────────────────────────────────────
+btn.onclick = () => gravando ? pararGravacao() : iniciarGravacao();
 
-// Estado
-let gravando     = false;
-let frasesArr    = [];        // frases finais aceitas, em ordem
-let frasesSet    = new Set(); // fingerprints já vistos
-let interim      = "";        // texto provisório atual
+async function iniciarGravacao() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks  = [];
+        gravando     = true;
 
-const SILENCE_MS = 4000;
-const MAX_MS     = 60000;
+        // Escolhe o melhor formato suportado
+        const mimeType = getSupportedMime();
+        const options  = mimeType ? { mimeType } : {};
+        mediaRecorder  = new MediaRecorder(stream, options);
 
-let silenceTimer    = null;
-let silenceIv       = null;
-let totalIv         = null;
-let totalMs         = 0;
-let silenceMs       = 0;
+        mediaRecorder.ondataavailable = e => {
+            if (e.data && e.data.size > 0) audioChunks.push(e.data);
+        };
+        mediaRecorder.onstop = () => {
+            stream.getTracks().forEach(t => t.stop());
+            processarAudio(mimeType || 'audio/webm');
+        };
 
-// Reconhecedor
-const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-if (!SpeechAPI) { statusEl.textContent = "Navegador não suportado"; btn.disabled = true; }
-let rec;
+        mediaRecorder.start(250); // coleta chunks a cada 250ms
 
-function novoRec() {
-    try { rec && rec.abort(); } catch(e) {}
-    rec = new SpeechAPI();
-    rec.lang            = 'pt-BR';
-    rec.continuous      = true;
-    rec.interimResults  = true;
-    rec.maxAlternatives = 1;
-    rec.onresult = onResult;
-    rec.onend    = onEnd;
-    rec.onerror  = onError;
+        // UI
+        btn.classList.add('recording');
+        btn.textContent = "⏹";
+        waveEl.classList.add('active');
+        timerEl.classList.remove('hidden');
+        setStatus("🔴 Gravando... toque para parar", "active");
+        totalSecs = 0;
+        atualizarTimer();
+        clearInterval(timerIv);
+        timerIv = setInterval(() => {
+            totalSecs++;
+            atualizarTimer();
+            if (totalSecs >= MAX_SECS) pararGravacao();
+        }, 1000);
+
+    } catch(err) {
+        console.error(err);
+        setStatus("❌ Sem acesso ao microfone", "");
+    }
 }
 
-btn.onclick = () => gravando ? parar(true) : iniciar();
-
-function iniciar() {
-    frasesArr = []; frasesSet = new Set(); interim = "";
-    gravando = true; totalMs = 0;
-
-    transcriptEl.textContent = "Ouvindo...";
-    transcriptEl.classList.remove('has-text');
-    setStatus("🔴 Gravando...", "active");
-    btn.classList.add('recording');
-    btn.textContent = "⏹";
-
-    totalTimerEl.textContent = "⏱ 00:00";
-    clearInterval(totalIv);
-    totalIv = setInterval(() => {
-        totalMs += 1000;
-        const m = String(Math.floor(totalMs/60000)).padStart(2,'0');
-        const s = String(Math.floor((totalMs%60000)/1000)).padStart(2,'0');
-        totalTimerEl.textContent = `⏱ ${m}:${s}`;
-        if (totalMs >= MAX_MS) parar(true);
-    }, 1000);
-
-    resetSilence();
-    novoRec();
-    rec.start();
-}
-
-function parar(processar) {
+function pararGravacao() {
+    if (!gravando) return;
     gravando = false;
-    clearTimeout(silenceTimer);
-    clearInterval(silenceIv);
-    clearInterval(totalIv);
-    silenceFill.style.width = '0%';
-    silenceLbl.textContent  = '';
-    try { rec.stop(); } catch(e) {}
+    clearInterval(timerIv);
+    mediaRecorder && mediaRecorder.stop();
+
     btn.classList.remove('recording');
+    btn.innerHTML = '<div class="spinner"></div>';
+    btn.classList.add('loading');
+    waveEl.classList.remove('active');
+    setStatus("⚙️ Transcrevendo áudio...", "thinking");
+}
+
+function atualizarTimer() {
+    const m = String(Math.floor(totalSecs/60)).padStart(2,'0');
+    const s = String(totalSecs%60).padStart(2,'0');
+    timerEl.textContent = `${m}:${s}`;
+}
+
+// ── Escolhe MIME suportado pelo device ────────────────────────
+function getSupportedMime() {
+    const candidatos = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/ogg;codecs=opus',
+        'audio/ogg',
+        'audio/mp4',
+    ];
+    for (const m of candidatos) {
+        if (MediaRecorder.isTypeSupported(m)) return m;
+    }
+    return null;
+}
+
+// ── Converte blob para base64 ─────────────────────────────────
+function blobParaBase64(blob) {
+    return new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onloadend = () => res(reader.result.split(',')[1]);
+        reader.onerror  = rej;
+        reader.readAsDataURL(blob);
+    });
+}
+
+// ── Processa áudio com a API da Anthropic ────────────────────
+async function processarAudio(mimeType) {
+    try {
+        const blob   = new Blob(audioChunks, { type: mimeType });
+        const base64 = await blobParaBase64(blob);
+
+        // Mapeia para media_type aceito pela API
+        const mediaTypeMap = {
+            'audio/webm;codecs=opus': 'audio/webm',
+            'audio/webm':             'audio/webm',
+            'audio/ogg;codecs=opus':  'audio/ogg',
+            'audio/ogg':              'audio/ogg',
+            'audio/mp4':              'audio/mp4',
+        };
+        const apiMediaType = mediaTypeMap[mimeType] || 'audio/webm';
+
+        const resp = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: "claude-sonnet-4-20250514",
+                max_tokens: 300,
+                messages: [{
+                    role: "user",
+                    content: [
+                        {
+                            type: "text",
+                            text: `Você é um assistente de lanchonete/comércio.
+Primeiro, transcreva exatamente o que foi dito neste áudio em português.
+Depois, extraia produto, quantidade e forma de pagamento.
+
+Responda APENAS com este JSON (sem markdown, sem explicação):
+{
+  "transcricao": "texto exato do que foi dito",
+  "produto": "nome do produto (ou Não identificado)",
+  "quantidade": número inteiro,
+  "pagamento": "cartão | pix | dinheiro | débito | crédito | Não informado"
+}`
+                        },
+                        {
+                            type: "document",
+                            source: {
+                                type: "base64",
+                                media_type: apiMediaType,
+                                data: base64
+                            }
+                        }
+                    ]
+                }]
+            })
+        });
+
+        const data   = await resp.json();
+
+        // Verifica erro da API
+        if (data.error) throw new Error(data.error.message || "Erro API");
+
+        const raw    = (data.content?.[0]?.text || "{}").replace(/```json|```/g,"").trim();
+        const parsed = JSON.parse(raw);
+
+        transcript.textContent = parsed.transcricao || "(sem transcrição)";
+        transcript.classList.add('has-text');
+
+        document.getElementById('r-produto').textContent = parsed.produto    || "Não identificado";
+        document.getElementById('r-qtd').textContent     = parsed.quantidade ?? 1;
+        document.getElementById('r-pag').textContent     = parsed.pagamento  || "Não informado";
+        setStatus("✅ Pedido processado!", "done");
+
+    } catch(err) {
+        console.error("Erro ao processar áudio:", err);
+        transcript.textContent = "Erro ao processar. Tente novamente.";
+        setStatus("❌ Erro — tente novamente", "");
+    }
+
+    btn.classList.remove('loading');
     btn.textContent = "🎤";
-
-    if (processar) {
-        const txt = textoFinal();
-        if (txt) processarComIA(txt);
-        else { setStatus("Nada capturado", ""); totalTimerEl.textContent = ''; }
-    }
-}
-
-function onResult(e) {
-    interim = "";
-    for (let i = e.resultIndex; i < e.results.length; i++) {
-        const frase = e.results[i][0].transcript.trim();
-        if (!frase) continue;
-        if (e.results[i].isFinal) {
-            const fp = norm(frase);
-            if (!frasesSet.has(fp)) {
-                frasesSet.add(fp);
-                frasesArr.push(frase);
-            }
-        } else {
-            interim = frase;
-        }
-    }
-    renderizar();
-    resetSilence();
-}
-
-function onEnd() {
-    if (!gravando) return;
-    // Android fechou — descarta interim e reinicia sessão
-    interim = "";
-    novoRec();
-    try { rec.start(); } catch(e) {}
-}
-
-function onError(e) {
-    if (!gravando) return;
-    if (['no-speech','aborted','network'].includes(e.error)) return;
-    console.warn("rec error:", e.error);
-}
-
-// Normaliza para fingerprint: sem acento, minúsculo, só alfanum+espaço
-function norm(txt) {
-    return txt.toLowerCase()
-              .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-              .replace(/[^a-z0-9 ]/g,"")
-              .replace(/\s+/g," ").trim();
-}
-
-function textoFinal() {
-    return [...frasesArr, interim].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
-}
-
-function renderizar() {
-    const txt = textoFinal();
-    transcriptEl.textContent = txt || "Ouvindo...";
-    transcriptEl.classList.toggle('has-text', !!txt);
-    transcriptEl.scrollTop = transcriptEl.scrollHeight;
-}
-
-function resetSilence() {
-    clearTimeout(silenceTimer);
-    clearInterval(silenceIv);
-    silenceMs = 0;
-    silenceFill.style.width = '0%';
-    silenceLbl.textContent  = '';
-
-    silenceIv = setInterval(() => {
-        silenceMs += 100;
-        silenceFill.style.width = Math.min((silenceMs/SILENCE_MS)*100, 100) + '%';
-        const rest = Math.ceil((SILENCE_MS - silenceMs)/1000);
-        if (rest <= 3 && silenceMs > 800) silenceLbl.textContent = `encerrando em ${rest}s`;
-    }, 100);
-
-    silenceTimer = setTimeout(() => { if (gravando) parar(true); }, SILENCE_MS);
+    timerEl.classList.add('hidden');
 }
 
 function setStatus(msg, cls) {
     statusEl.textContent = msg;
     statusEl.className   = 'status-pill' + (cls ? ' '+cls : '');
-}
-
-async function processarComIA(texto) {
-    setStatus("⚙️ Interpretando...", "thinking");
-    btn.classList.add('loading');
-    btn.innerHTML = '<div class="spinner"></div>';
-    transcriptEl.textContent = texto;
-    transcriptEl.classList.add('has-text');
-    totalTimerEl.textContent = '';
-
-    const prompt = `Você é um assistente de lanchonete. Analise este pedido falado.
-O texto pode ter pequenas repetições de voz — interprete a intenção real.
-
-Texto: "${texto}"
-
-Responda APENAS JSON válido, sem markdown:
-{"produto":"nome (ou Não identificado)","quantidade":número,"pagamento":"cartão|pix|dinheiro|débito|crédito|Não informado"}`;
-
-    try {
-        const resp = await fetch("https://api.anthropic.com/v1/messages", {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body: JSON.stringify({
-                model:"claude-sonnet-4-20250514", max_tokens:200,
-                messages:[{role:"user",content:prompt}]
-            })
-        });
-        const data   = await resp.json();
-        const raw    = (data.content?.[0]?.text||"{}").replace(/```json|```/g,"").trim();
-        const parsed = JSON.parse(raw);
-        document.getElementById('r-produto').textContent = parsed.produto    || "Não identificado";
-        document.getElementById('r-qtd').textContent     = parsed.quantidade ?? 1;
-        document.getElementById('r-pag').textContent     = parsed.pagamento  || "Não informado";
-        setStatus("✅ Pedido processado!", "done");
-    } catch(err) {
-        console.error(err);
-        fallback(texto);
-        setStatus("⚠️ Processado localmente", "done");
-    }
-
-    btn.classList.remove('loading');
-    btn.textContent = "🎤";
-}
-
-function fallback(t) {
-    const txt = t.toLowerCase();
-    const nMap = {"um":1,"uma":1,"dois":2,"duas":2,"três":3,"quatro":4,"cinco":5};
-    let qtd = 1;
-    const nm = txt.match(/\d+/); if (nm) qtd = parseInt(nm[0]);
-    Object.keys(nMap).forEach(k => { if (txt.split(" ").includes(k)) qtd = nMap[k]; });
-    let pag = "Não informado";
-    ["cartão","pix","dinheiro","débito","crédito"].forEach(f => {
-        if (txt.includes(f)) pag = f[0].toUpperCase()+f.slice(1);
-    });
-    let prod = txt
-        .replace(/\d+/g,"")
-        .replace(/\b(quero|uma|um|no|em|de|com|por favor|me dá|me|pra|para|favor)\b/gi,"")
-        .replace(pag.toLowerCase(),"")
-        .replace(/\s+/g,' ').trim();
-    document.getElementById('r-produto').textContent = prod || "Não identificado";
-    document.getElementById('r-qtd').textContent     = qtd;
-    document.getElementById('r-pag').textContent     = pag;
 }
 </script>
 </body>
