@@ -14,11 +14,9 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg); color: var(--text);
-            min-height: 100vh;
-            display: flex; align-items: flex-start; justify-content: center;
-            padding: 20px;
+            font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+            min-height: 100vh; display: flex; align-items: flex-start;
+            justify-content: center; padding: 20px;
         }
         .card {
             background: var(--card); border: 1px solid var(--border);
@@ -36,14 +34,13 @@
         .subtitle { color: var(--muted); font-size: 0.8rem; margin-bottom: 18px; }
 
         .instruction {
-            display: flex; gap: 10px;
+            display: flex; gap: 10px; align-items: flex-start;
             background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.2);
             border-radius: 12px; padding: 11px 13px; margin-bottom: 16px;
         }
         .instruction p { font-size: 0.79rem; color: var(--accent2); line-height: 1.55; }
         .instruction strong { display: block; margin-bottom: 1px; }
 
-        /* INPUT */
         .input-wrap { position: relative; margin-bottom: 10px; }
         .pedido-input {
             width: 100%; background: rgba(255,255,255,0.04);
@@ -63,9 +60,8 @@
         .clear-btn.visible { display: block; }
 
         .process-btn {
-            width: 100%; padding: 14px;
-            background: var(--accent); border: none; border-radius: 13px;
-            color: white; font-family: 'Syne', sans-serif;
+            width: 100%; padding: 14px; background: var(--accent); border: none;
+            border-radius: 13px; color: white; font-family: 'Syne', sans-serif;
             font-size: 0.95rem; font-weight: 700; cursor: pointer;
             transition: all 0.2s; margin-bottom: 16px;
             display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -79,149 +75,66 @@
         }
         .status-bar.done  { color: var(--success); }
         .status-bar.error { color: var(--red); }
-        .status-bar.thinking { color: var(--accent); }
 
-        /* ═══════════════════════════════════
-           COMANDA
-        ═══════════════════════════════════ */
+        /* COMANDA */
         .comanda-wrap { display: none; }
         .comanda-wrap.visible { display: block; }
 
         .comanda {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 14px;
-        }
-
-        .comanda-header {
-            background: rgba(255,107,53,0.12);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 16px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .comanda-header span {
-            font-family: 'Syne', sans-serif; font-size: 0.8rem;
-            font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
-        }
-        .comanda-num {
-            background: var(--accent); color: white;
-            font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 800;
-            padding: 2px 10px; border-radius: 20px;
-        }
-
-        .comanda-body { padding: 0; }
-
-        .comanda-row {
-            display: flex; align-items: flex-start; gap: 0;
-            border-bottom: 1px solid var(--border);
-            padding: 0;
-        }
-        .comanda-row:last-child { border-bottom: none; }
-
-        .comanda-icon-col {
-            width: 44px; min-width: 44px;
-            display: flex; align-items: center; justify-content: center;
-            padding: 14px 0;
-            border-right: 1px solid var(--border);
-            font-size: 1rem;
-        }
-
-        .comanda-content {
-            flex: 1; padding: 12px 14px;
-        }
-        .comanda-label {
-            font-size: 0.65rem; color: var(--muted); text-transform: uppercase;
-            letter-spacing: 0.08em; margin-bottom: 3px;
-        }
-        .comanda-value {
-            font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4;
-        }
-        .comanda-value.accent { color: var(--accent2); }
-        .comanda-value.pix    { color: #5bc8ff; }
-        .comanda-value.green  { color: var(--success); }
-        .comanda-value.purple { color: #c084fc; }
-        .comanda-value.muted  { color: var(--muted); font-style: italic; font-weight: 400; }
-
-        /* Itens da comanda — cada produto numa linha */
-        .item-line {
-            display: flex; align-items: baseline; gap: 8px;
-            padding: 3px 0;
-        }
-        .item-line:not(:last-child) {
-            border-bottom: 1px dashed rgba(255,255,255,0.06);
-            padding-bottom: 6px; margin-bottom: 3px;
-        }
-        .item-qtd {
-            font-family: 'Syne', sans-serif; font-size: 0.95rem;
-            font-weight: 800; color: var(--accent); min-width: 28px;
-        }
-        .item-nome {
-            font-size: 0.92rem; font-weight: 600; color: var(--text); flex: 1;
-        }
-
-        /* Seção adicionar */
-        .add-section {
             background: var(--card2); border: 1px solid var(--border);
-            border-radius: 16px; padding: 14px; margin-bottom: 0;
+            border-radius: 16px; overflow: hidden; margin-bottom: 14px;
         }
-        .sec-title {
-            font-size: 0.68rem; font-family: 'Syne', sans-serif; font-weight: 700;
-            color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
-            margin-bottom: 10px;
+        .comanda-header {
+            background: rgba(255,107,53,0.12); border-bottom: 1px solid var(--border);
+            padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
         }
+        .comanda-header span { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+        .comanda-num { background: var(--accent); color: white; font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; }
 
-        .tags-wrap { margin-bottom: 10px; min-height: 0; }
-        .item-tag {
-            display: inline-flex; align-items: center; gap: 5px;
-            background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.22);
-            border-radius: 20px; padding: 3px 10px;
-            font-size: 0.78rem; color: var(--accent2); margin: 3px 2px;
-        }
-        .item-tag button {
-            background: none; border: none; color: var(--muted);
-            font-size: 0.68rem; cursor: pointer; padding: 0;
-        }
+        .comanda-row { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); }
+        .comanda-row:last-child { border-bottom: none; }
+        .comanda-icon-col { width: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; font-size: 1rem; border-right: 1px solid var(--border); }
+        .comanda-content { flex: 1; padding: 11px 13px; }
+        .comanda-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+
+        .item-line { display: flex; align-items: baseline; gap: 8px; padding: 2px 0; }
+        .item-line + .item-line { border-top: 1px dashed rgba(255,255,255,0.06); padding-top: 5px; margin-top: 3px; }
+        .item-qtd { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--accent); min-width: 30px; }
+        .item-nome { font-size: 0.93rem; font-weight: 600; color: var(--text); }
+
+        .val { font-size: 0.93rem; font-weight: 600; color: var(--text); }
+        .val.pix    { color: #5bc8ff; }
+        .val.green  { color: var(--success); }
+        .val.purple { color: #c084fc; }
+        .val.muted  { color: var(--muted); font-style: italic; font-weight: 400; }
+        .val.accent { color: var(--accent2); }
+
+        /* ADD / OBS */
+        .add-section { background: var(--card2); border: 1px solid var(--border); border-radius: 16px; padding: 14px; }
+        .sec-title { font-size: 0.68rem; font-family: 'Syne', sans-serif; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+        .tags-wrap { margin-bottom: 8px; }
+        .item-tag { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.22); border-radius: 20px; padding: 3px 10px; font-size: 0.78rem; color: var(--accent2); margin: 2px; }
+        .item-tag button { background: none; border: none; color: var(--muted); font-size: 0.68rem; cursor: pointer; padding: 0; }
         .item-tag button:hover { color: var(--red); }
-
-        .add-input {
-            width: 100%; background: rgba(255,255,255,0.04);
-            border: 1.5px solid var(--border); border-radius: 11px;
-            color: var(--text); font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem; padding: 10px 12px;
-            outline: none; margin-bottom: 8px;
-            transition: border-color 0.2s;
+        .add-input, .obs-input {
+            width: 100%; background: rgba(255,255,255,0.04); border: 1.5px solid var(--border);
+            border-radius: 11px; color: var(--text); font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem; padding: 10px 12px; outline: none; transition: border-color 0.2s;
         }
-        .add-input::placeholder { color: var(--muted); font-size: 0.83rem; }
-        .add-input:focus { border-color: var(--accent); }
-
+        .add-input { margin-bottom: 8px; }
+        .add-input::placeholder, .obs-input::placeholder { color: var(--muted); font-size: 0.82rem; }
+        .add-input:focus, .obs-input:focus { border-color: var(--accent); }
+        .obs-input { resize: none; min-height: 54px; line-height: 1.5; }
         .add-btn {
-            width: 100%; padding: 11px;
-            background: rgba(255,107,53,0.13); border: 1px solid rgba(255,107,53,0.28);
-            border-radius: 11px; color: var(--accent);
+            width: 100%; padding: 11px; background: rgba(255,107,53,0.13);
+            border: 1px solid rgba(255,107,53,0.28); border-radius: 11px; color: var(--accent);
             font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
             cursor: pointer; transition: all 0.2s; margin-bottom: 14px;
         }
         .add-btn:hover:not(:disabled) { background: rgba(255,107,53,0.22); }
         .add-btn:disabled { opacity: 0.35; cursor: default; }
-
         .divider { height: 1px; background: var(--border); margin: 12px 0; }
-
         .obs-label { font-size: 0.68rem; font-family: 'Syne', sans-serif; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 7px; display: block; }
-        .obs-input {
-            width: 100%; background: rgba(255,255,255,0.04);
-            border: 1.5px solid var(--border); border-radius: 11px;
-            color: var(--text); font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem; padding: 10px 12px;
-            outline: none; resize: none; min-height: 56px; line-height: 1.5;
-            transition: border-color 0.2s;
-        }
-        .obs-input::placeholder { color: var(--muted); font-size: 0.82rem; }
-        .obs-input:focus { border-color: var(--border); }
-
-        .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -244,20 +157,14 @@
     <div class="status-bar" id="statusBar"></div>
     <button class="process-btn" id="processBtn" disabled>✨ Processar Pedido</button>
 
-    <!-- COMANDA -->
     <div class="comanda-wrap" id="comandaWrap">
-
         <div class="comanda">
             <div class="comanda-header">
                 <span>🧾 Comanda</span>
-                <span class="comanda-num" id="comandaNum">#1</span>
+                <span class="comanda-num" id="comandaNum">#---</span>
             </div>
-            <div class="comanda-body" id="comandaBody">
-                <!-- preenchido pela IA -->
-            </div>
+            <div id="comandaBody"></div>
         </div>
-
-        <!-- ADICIONAR MAIS / OBS -->
         <div class="add-section">
             <div class="sec-title">➕ Adicionar ao Pedido</div>
             <div class="tags-wrap" id="tagsWrap"></div>
@@ -265,7 +172,6 @@
                 placeholder="🎤 Fale ou digite mais um item..."
                 autocomplete="off" autocorrect="off" spellcheck="false"/>
             <button class="add-btn" id="addBtn" disabled>+ Adicionar item</button>
-
             <div class="divider"></div>
             <label class="obs-label" for="obsInput">📝 Observação</label>
             <textarea class="obs-input" id="obsInput"
@@ -276,21 +182,21 @@
 </div>
 
 <script>
-const input      = document.getElementById('pedidoInput');
-const clearBtn   = document.getElementById('clearBtn');
-const processBtn = document.getElementById('processBtn');
-const statusBar  = document.getElementById('statusBar');
-const comandaWrap= document.getElementById('comandaWrap');
-const comandaBody= document.getElementById('comandaBody');
-const addInput   = document.getElementById('addInput');
-const addBtn     = document.getElementById('addBtn');
-const tagsWrap   = document.getElementById('tagsWrap');
+// ── Elementos ────────────────────────────────────────────────
+const input       = document.getElementById('pedidoInput');
+const clearBtn    = document.getElementById('clearBtn');
+const processBtn  = document.getElementById('processBtn');
+const statusBar   = document.getElementById('statusBar');
+const comandaWrap = document.getElementById('comandaWrap');
+const comandaBody = document.getElementById('comandaBody');
+const addInput    = document.getElementById('addInput');
+const addBtn      = document.getElementById('addBtn');
+const tagsWrap    = document.getElementById('tagsWrap');
 
-let itensExtras  = [];
-let pedidoNum    = Math.floor(Math.random() * 900) + 100;
+let itensExtras = [];
+let pedidoNum   = Math.floor(Math.random() * 900) + 100;
 document.getElementById('comandaNum').textContent = '#' + pedidoNum;
 
-// ── Input principal ────────────────────────────────────────────
 input.addEventListener('input', () => {
     const tem = input.value.trim().length > 0;
     processBtn.disabled = !tem;
@@ -300,24 +206,19 @@ input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!processBtn.disabled) processBtn.click(); }
 });
 clearBtn.onclick = () => {
-    input.value = ''; processBtn.disabled = true;
-    clearBtn.classList.remove('visible');
+    input.value = ''; processBtn.disabled = true; clearBtn.classList.remove('visible');
     statusBar.textContent = ''; statusBar.className = 'status-bar';
     comandaWrap.classList.remove('visible');
-    itensExtras = []; renderTags();
-    input.focus();
+    itensExtras = []; renderTags(); input.focus();
 };
-processBtn.onclick = () => { const t = input.value.trim(); if (t) processarComIA(t); };
+processBtn.onclick = () => { const t = input.value.trim(); if (t) processar(t); };
 
-// ── Adicionar item extra ───────────────────────────────────────
 addInput.addEventListener('input', () => { addBtn.disabled = addInput.value.trim().length === 0; });
 addInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (!addBtn.disabled) addBtn.click(); } });
 addBtn.onclick = () => {
-    const val = addInput.value.trim();
-    if (!val) return;
-    itensExtras.push(val);
-    renderTags();
-    addInput.value = ''; addBtn.disabled = true;
+    const val = addInput.value.trim(); if (!val) return;
+    itensExtras.push(limparNome(norm(val)));
+    renderTags(); addInput.value = ''; addBtn.disabled = true;
 };
 function renderTags() {
     tagsWrap.innerHTML = itensExtras.map((item, i) =>
@@ -326,107 +227,228 @@ function renderTags() {
 }
 function remTag(i) { itensExtras.splice(i,1); renderTags(); }
 
-// ── Processar com IA ───────────────────────────────────────────
-async function processarComIA(texto) {
-    processBtn.disabled = true;
-    processBtn.innerHTML = '<div class="spinner"></div> Processando...';
-    setStatus('⚙️ Interpretando pedido...', 'thinking');
+// ════════════════════════════════════════════════════════════
+// PARSER LOCAL ROBUSTO
+// ════════════════════════════════════════════════════════════
 
-    const prompt = `Você é um sistema de comanda de lanchonete/restaurante.
-Analise o pedido falado abaixo e retorne um JSON estruturado.
-
-O cliente pode pedir múltiplos itens de uma vez. Separe cada item individualmente.
-Se o cliente não informar endereço, use "Retirada no local".
-Se não informar quantidade de um item, considere 1.
-
-Pedido: "${texto}"
-
-Retorne APENAS JSON válido, sem markdown:
-{
-  "itens": [
-    {"qtd": número, "nome": "nome limpo do produto"},
-    {"qtd": número, "nome": "nome limpo do produto"}
-  ],
-  "pagamento": "Pix | Cartão | Crédito | Débito | Dinheiro | Vale refeição | Não informado",
-  "troco": "valor em reais ou null",
-  "endereco": "endereço ou Retirada no local"
-}`;
-
-    try {
-        const resp = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'anthropic-dangerous-direct-browser-calls': 'true'
-            },
-            body: JSON.stringify({
-                model: 'claude-haiku-4-5-20251001',
-                max_tokens: 400,
-                messages: [{ role: 'user', content: prompt }]
-            })
-        });
-
-        const data = await resp.json();
-        if (data.error) throw new Error(data.error.message);
-
-        const raw    = (data.content?.[0]?.text || '{}').replace(/```json|```/g,'').trim();
-        const parsed = JSON.parse(raw);
-        renderComanda(parsed);
-        setStatus('✅ Comanda gerada!', 'done');
-
-    } catch(err) {
-        console.error(err);
-        // fallback local
-        const fallback = fallbackParse(texto);
-        renderComanda(fallback);
-        setStatus('✅ Comanda gerada!', 'done');
-    }
-
-    processBtn.disabled = false;
-    processBtn.innerHTML = '✨ Processar Pedido';
+function norm(txt) {
+    return txt
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove acentos
+        .replace(/[^\w\s]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
 }
 
-// ── Renderiza comanda ──────────────────────────────────────────
-function renderComanda(data) {
-    const itens   = data.itens || [];
-    const pag     = data.pagamento || 'Não informado';
-    const troco   = data.troco;
-    const end     = data.endereco || 'Retirada no local';
-    const hora    = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+// Mapa de extenso → número
+const NUMS = {
+    'zero':0,'um':1,'uma':1,'hum':1,'dois':2,'duas':2,
+    'tres':3,'trez':3,'quatro':4,'cinco':5,'seis':6,
+    'sete':7,'oito':8,'nove':9,'dez':10,'onze':11,
+    'doze':12,'treze':13,'catorze':14,'quatorze':14,'quinze':15
+};
 
-    let html = '';
+// Detecta número extenso ou dígito antes de um texto
+function extrairQtdNome(seg) {
+    // Dígito no início: "2 coca lata", "10 pasteis"
+    let m = seg.match(/^(\d+)\s+(.+)$/);
+    if (m) return { qtd: parseInt(m[1]), nome: m[2] };
 
-    // ── Itens ──
-    html += row('🛍️', 'Itens do Pedido',
-        itens.length > 0
-            ? itens.map(it =>
-                `<div class="item-line">
-                    <span class="item-qtd">${it.qtd}x</span>
-                    <span class="item-nome">${capitalizar(it.nome)}</span>
-                </div>`
-              ).join('')
-            : '<span class="comanda-value muted">Não identificado</span>'
-    );
-
-    // ── Pagamento ──
-    html += row('💳', 'Pagamento',
-        `<span class="comanda-value ${corPag(pag)}">${pag}</span>`
-    );
-
-    // ── Troco ──
-    if (troco && pag.toLowerCase() === 'dinheiro') {
-        html += row('💵', 'Troco para', `<span class="comanda-value accent">R$ ${troco}</span>`);
+    // Extenso no início: "duas cocas", "um suco"
+    for (const [palavra, val] of Object.entries(NUMS)) {
+        const re = new RegExp(`^${palavra}\\s+(.+)$`);
+        m = seg.match(re);
+        if (m) return { qtd: val, nome: m[1] };
     }
 
-    // ── Endereço ──
-    html += row('📍', 'Endereço', `<span class="comanda-value ${end === 'Retirada no local' ? 'muted' : ''}">${end}</span>`);
+    // Dígito em qualquer lugar: "coca 2 lata"
+    m = seg.match(/^(.+?)\s+(\d+)(?:\s+(.+))?$/);
+    if (m && parseInt(m[2]) < 50) {
+        const nome = [m[1], m[3]].filter(Boolean).join(' ');
+        return { qtd: parseInt(m[2]), nome };
+    }
 
-    // ── Horário ──
-    html += row('🕐', 'Horário', `<span class="comanda-value muted">${hora}</span>`);
+    return { qtd: 1, nome: seg };
+}
+
+// Palavras que indicam início de um NOVO item
+const SEPARADORES_ITEM = [
+    // Conjunção comum
+    /\be\s+(?=\w)/g,
+    /\bmais\s+(?=\w)/g,
+    /,\s*/g,
+];
+
+// Remove lixo do nome do produto
+function limparNome(nome) {
+    const lixo = [
+        // verbos de pedido
+        'quero','queria','queria','vou querer','vou','quero pedir','gostaria','posso pedir',
+        'me da','me de','me traz','traz','traga','pode trazer','manda','me manda',
+        // conectores
+        'por favor','pfv','pf','obrigado','obrigada','obrigadao',
+        'favor','gentileza',
+        // preposições / artigos
+        'um','uma','uns','umas',
+        'o','a','os','as',
+        'no','na','nos','nas','pelo','pela','pelos','pelas',
+        'com','sem','de','do','da','dos','das',
+        'ao','aos','a',
+        'para','pra','pro','pros','pras',
+        'por','ate',
+        'em','entre',
+        'e','ou',
+        'ja','ai','la','aqui','ali','logo',
+        // relacionados a pagamento (remove do nome)
+        'pagar','pagamento','pago','paga','pagando','pague','pago','vai pagar','vou pagar',
+        // ruídos de voz
+        'tipo','assim','tal','ai','entao','ne','né',
+    ];
+
+    let s = nome;
+
+    // Remove frases compostas primeiro
+    s = s.replace(/\bvou querer\b/g, '');
+    s = s.replace(/\bgostaria de\b/g, '');
+    s = s.replace(/\bpode ser\b/g, '');
+    s = s.replace(/\bme (da|de|traz|manda)\b/g, '');
+
+    // Remove palavras simples
+    lixo.forEach(p => {
+        s = s.replace(new RegExp(`\\b${p}\\b`, 'g'), '');
+    });
+
+    return s.replace(/\s+/g, ' ').trim();
+}
+
+// Detecta pagamento no texto completo
+function detectarPagamento(t) {
+    if (/\b(pix|pics|pique|pixe|pis|picht|pixt|pixd)\b/.test(t)) return 'Pix';
+    if (/\bcartao\s+de\s+credito\b/.test(t)) return 'Crédito';
+    if (/\bcartao\s+de\s+debito\b/.test(t))  return 'Débito';
+    if (/\bcredito\b/.test(t))  return 'Crédito';
+    if (/\bdebito\b/.test(t))   return 'Débito';
+    if (/\bcartao\b/.test(t))   return 'Cartão';
+    if (/\b(dinheiro|especie|nota|cedula)\b/.test(t)) return 'Dinheiro';
+    if (/\b(vale\s*refeicao|vale\s*refei|vr\b)\b/.test(t)) return 'Vale refeição';
+    // "via" seguido de forma: "pagamento via pix" já coberto, mas às vezes Android grava "via" solto
+    if (/\bvia\s+pix\b/.test(t)) return 'Pix';
+    if (/\bvia\s+cart\w*\b/.test(t)) return 'Cartão';
+    return 'Não informado';
+}
+
+// Detecta troco
+function detectarTroco(t) {
+    const m = t.match(/troco\s+(?:pra|para|de|com|n[ao])?\s*(\d+)/);
+    if (m) return m[1];
+    const vals = {'dez':10,'vinte':20,'trinta':30,'quarenta':40,'cinquenta':50,'sessenta':60,'setenta':70,'oitenta':80,'noventa':90,'cem':100,'duzentos':200};
+    for (const [k,v] of Object.entries(vals)) {
+        if (new RegExp(`\\btroco.*\\b${k}\\b`).test(t)) return String(v) + ',00';
+    }
+    return null;
+}
+
+// Remove tudo relacionado a pagamento do texto antes de dividir itens
+function removerPagamentoDoPedido(t, pag) {
+    // Remove frases de pagamento
+    let s = t;
+    s = s.replace(/\b(pagar(ei|ando)?|pagamento|vou pagar|vai pagar|forma de pagamento)\b.*$/g, '');
+    s = s.replace(/\b(no|na|pelo|pela|via)\s+(pix|pics|pique|pixe|cartao|credito|debito|dinheiro|especie|vale)\b/g, '');
+    s = s.replace(/\b(pix|pics|pique|pixe|cartao|credito|debito|dinheiro|especie|vale refeicao|vr)\b/g, '');
+    s = s.replace(/\btroco\b.*/g, '');
+    // Remove valores monetários soltos
+    s = s.replace(/\b\d+\s*reais\b/g, '');
+    s = s.replace(/\b(cem|cinquenta|vinte|trinta|quarenta|sessenta|setenta|oitenta|noventa|duzentos)\s+reais\b/g, '');
+    return s.replace(/\s+/g, ' ').trim();
+}
+
+// DIVIDE o texto em segmentos de itens
+function dividirEmItens(t) {
+    // Substitui separadores por pipe para facilitar split
+    // "e" só separa quando entre dois substantivos (não no meio de nome composto)
+    let s = t;
+
+    // Vírgula sempre separa
+    s = s.replace(/,/g, ' | ');
+
+    // "e mais" sempre separa
+    s = s.replace(/\be\s+mais\b/g, ' | ');
+
+    // "e" separa quando seguido de número ou extenso: "e duas cocas", "e um suco"
+    const numsRe = Object.keys(NUMS).join('|');
+    s = s.replace(new RegExp(`\\be\\s+(\\d+|${numsRe})\\b`, 'g'), ' | $1');
+
+    // "e" separa quando seguido de palavras que iniciam pedido: "e uma", "e dois"
+    s = s.replace(/\be\s+(um|uma|dois|duas|tres|quatro|cinco|seis|sete|oito|nove|dez)\b/g, ' | $1');
+
+    // Divide por pipe
+    return s.split('|').map(p => p.trim()).filter(p => p.length > 1);
+}
+
+// FUNÇÃO PRINCIPAL
+function processar(raw) {
+    const t = norm(raw);
+
+    const pag   = detectarPagamento(t);
+    const troco = detectarTroco(t);
+
+    // Remove pagamento antes de dividir itens
+    const semPag = removerPagamentoDoPedido(t, pag);
+
+    // Divide em segmentos
+    const segs = dividirEmItens(semPag);
+
+    // Extrai qtd+nome de cada segmento e limpa
+    const itens = segs
+        .map(seg => {
+            const { qtd, nome } = extrairQtdNome(seg);
+            const nomeLimpo = limparNome(nome);
+            return { qtd, nome: cap(nomeLimpo) };
+        })
+        .filter(it => it.nome.length > 1);
+
+    // Se não separou nada útil, tenta tudo como 1 item
+    if (itens.length === 0) {
+        const nome = limparNome(semPag);
+        if (nome.length > 1) itens.push({ qtd: 1, nome: cap(nome) });
+    }
+
+    renderComanda({ itens, pagamento: pag, troco, endereco: 'Retirada no local' });
+    setStatus('✅ Comanda gerada!', 'done');
+}
+
+function renderComanda(data) {
+    const { itens, pagamento, troco, endereco } = data;
+    const hora = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    let html = '';
+
+    // Itens
+    const itensHtml = itens.length
+        ? itens.map(it => `
+            <div class="item-line">
+                <span class="item-qtd">${it.qtd}x</span>
+                <span class="item-nome">${it.nome}</span>
+            </div>`).join('')
+        : '<span class="val muted">Não identificado</span>';
+    html += row('🛍️', 'Itens do Pedido', itensHtml);
+
+    // Pagamento
+    html += row('💳', 'Pagamento', `<span class="val ${corPag(pagamento)}">${pagamento}</span>`);
+
+    // Troco
+    if (troco && pagamento === 'Dinheiro') {
+        html += row('💵', 'Troco para', `<span class="val accent">R$ ${troco}</span>`);
+    }
+
+    // Endereço
+    html += row('📍', 'Endereço', `<span class="val muted">${endereco}</span>`);
+
+    // Horário
+    html += row('🕐', 'Horário', `<span class="val muted">${hora}</span>`);
 
     comandaBody.innerHTML = html;
     comandaWrap.classList.add('visible');
-    setTimeout(() => comandaWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    setTimeout(() => comandaWrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
 }
 
 function row(icon, label, valueHtml) {
@@ -434,56 +456,27 @@ function row(icon, label, valueHtml) {
         <div class="comanda-icon-col">${icon}</div>
         <div class="comanda-content">
             <div class="comanda-label">${label}</div>
-            <div class="comanda-value">${valueHtml}</div>
+            <div>${valueHtml}</div>
         </div>
     </div>`;
 }
 
-function corPag(pag) {
-    const p = (pag || '').toLowerCase();
-    if (p === 'pix') return 'pix';
-    if (p === 'dinheiro') return 'green';
-    if (['cartão','crédito','débito','cartao','credito','debito'].includes(p)) return 'purple';
+function corPag(p) {
+    const s = (p||'').toLowerCase();
+    if (s === 'pix') return 'pix';
+    if (s === 'dinheiro') return 'green';
+    if (['cartão','crédito','débito','cartao','credito','debito'].includes(s)) return 'purple';
     return 'muted';
 }
 
-function capitalizar(s) {
+function cap(s) {
     if (!s) return s;
-    return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-}
-
-// ── Fallback local (sem API) ───────────────────────────────────
-function fallbackParse(raw) {
-    const t = raw.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w\s]/g,' ').replace(/\s+/g,' ').trim();
-
-    // Pagamento
-    let pag = 'Não informado';
-    if (/\b(pix|pics|pique|pixe)\b/.test(t)) pag = 'Pix';
-    else if (/\bcredito\b/.test(t)) pag = 'Crédito';
-    else if (/\bdebito\b/.test(t))  pag = 'Débito';
-    else if (/\bcartao\b/.test(t))  pag = 'Cartão';
-    else if (/\bdinheiro\b/.test(t)) pag = 'Dinheiro';
-
-    // Tenta extrair itens simples por vírgula/e
-    const partes = t.split(/\be\b|,/).map(p => p.trim()).filter(Boolean);
-    const itens = partes.map(p => {
-        const qtdMatch = p.match(/\b(\d+)\b/);
-        const qtd = qtdMatch ? parseInt(qtdMatch[1]) : 1;
-        let nome = p
-            .replace(/\b\d+\b/g,'')
-            .replace(/\b(um|uma|dois|duas|tres|quatro|cinco)\b/g,'')
-            .replace(/\b(quero|vou|queria|me da|por favor|pagar|no|na|com|de|do|da)\b/g,'')
-            .replace(pag.toLowerCase(),'')
-            .replace(/\s+/g,' ').trim();
-        return { qtd, nome };
-    }).filter(it => it.nome.length > 1);
-
-    return { itens, pagamento: pag, troco: null, endereco: 'Retirada no local' };
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function setStatus(msg, cls) {
     statusBar.textContent = msg;
-    statusBar.className   = 'status-bar' + (cls ? ' '+cls : '');
+    statusBar.className   = 'status-bar' + (cls ? ' ' + cls : '');
 }
 </script>
 </body>
