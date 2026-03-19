@@ -21,7 +21,7 @@
         }
         .card {
             background: var(--card); border: 1px solid var(--border);
-            border-radius: 24px; width: 100%; max-width: 380px;
+            border-radius: 24px; width: 100%; max-width: 390px;
             padding: 32px 24px; position: relative; overflow: hidden;
         }
         .card::before {
@@ -30,305 +30,254 @@
             background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
             pointer-events: none;
         }
-        h1 { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+        h1 {
+            font-family: 'Syne', sans-serif; font-size: 1.7rem;
+            font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px;
+        }
         h1 span { color: var(--accent); }
         .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 28px; }
 
-        .mic-area { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-bottom: 24px; }
-        .mic-btn {
-            width: 96px; height: 96px; border-radius: 50%;
-            border: 2px solid var(--border); background: var(--bg); color: var(--text);
-            font-size: 38px; cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; justify-content: center;
-            -webkit-tap-highlight-color: transparent;
+        /* INSTRUÇÃO */
+        .instruction {
+            display: flex; align-items: flex-start; gap: 12px;
+            background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.2);
+            border-radius: 12px; padding: 14px; margin-bottom: 22px;
         }
-        .mic-btn:hover { border-color: var(--accent); transform: scale(1.05); }
-        .mic-btn.recording { background: var(--red); border-color: var(--red); animation: pulse 1.2s infinite; }
-        .mic-btn.loading   { background: var(--accent); border-color: var(--accent); animation: none; }
-        @keyframes pulse {
-            0%,100% { box-shadow: 0 0 0 0 rgba(239,35,60,0.4); }
-            50%     { box-shadow: 0 0 0 16px rgba(239,35,60,0); }
-        }
-        .status-pill {
-            background: var(--border); border-radius: 20px;
-            padding: 7px 18px; font-size: 0.82rem; font-weight: 500;
-            color: var(--muted); transition: all 0.3s; text-align: center;
-        }
-        .status-pill.active   { background: rgba(239,35,60,0.15); color: var(--red); }
-        .status-pill.done     { background: rgba(6,214,160,0.15);  color: var(--success); }
-        .status-pill.thinking { background: rgba(255,107,53,0.15); color: var(--accent); }
+        .instruction .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+        .instruction p { font-size: 0.83rem; color: var(--accent2); line-height: 1.5; }
+        .instruction strong { display: block; margin-bottom: 2px; font-size: 0.88rem; }
 
-        /* Timer de gravação */
-        .rec-timer {
-            font-size: 2rem; font-family: 'Syne', sans-serif; font-weight: 700;
-            color: var(--red); letter-spacing: 0.05em;
-            min-height: 2.5rem; display: flex; align-items: center; justify-content: center;
+        /* CAMPO DE TEXTO */
+        .input-wrap { position: relative; margin-bottom: 16px; }
+        .pedido-input {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            padding: 16px 52px 16px 16px;
+            resize: none;
+            outline: none;
+            line-height: 1.5;
+            min-height: 80px;
+            transition: border-color 0.2s;
         }
-        .rec-timer.hidden { visibility: hidden; }
+        .pedido-input::placeholder { color: var(--muted); }
+        .pedido-input:focus { border-color: var(--accent); }
 
-        /* Waveform bars */
-        .wave { display: flex; align-items: center; gap: 4px; height: 32px; margin: 4px 0; }
-        .wave span {
-            display: inline-block; width: 4px; border-radius: 3px;
-            background: var(--red); height: 6px;
-            transition: height 0.1s;
+        .clear-btn {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--border); border: none; border-radius: 8px;
+            color: var(--muted); font-size: 0.8rem;
+            padding: 5px 8px; cursor: pointer;
+            display: none;
         }
-        .wave.active span { animation: bar 0.6s ease-in-out infinite alternate; }
-        .wave.active span:nth-child(1) { animation-delay: 0.0s; }
-        .wave.active span:nth-child(2) { animation-delay: 0.1s; }
-        .wave.active span:nth-child(3) { animation-delay: 0.2s; }
-        .wave.active span:nth-child(4) { animation-delay: 0.3s; }
-        .wave.active span:nth-child(5) { animation-delay: 0.2s; }
-        .wave.active span:nth-child(6) { animation-delay: 0.1s; }
-        .wave.active span:nth-child(7) { animation-delay: 0.0s; }
-        @keyframes bar { from { height: 4px; } to { height: 28px; } }
+        .clear-btn.visible { display: block; }
 
-        /* Transcrição */
-        .transcript-box {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-            border-radius: 12px; padding: 14px; margin-bottom: 20px;
-            min-height: 52px; max-height: 100px; overflow-y: auto;
-            font-size: 0.9rem; color: var(--muted); font-style: italic; line-height: 1.5;
+        /* BOTÃO PROCESSAR */
+        .process-btn {
+            width: 100%; padding: 16px;
+            background: var(--accent); border: none; border-radius: 14px;
+            color: white; font-family: 'Syne', sans-serif;
+            font-size: 1rem; font-weight: 700;
+            letter-spacing: 0.02em; cursor: pointer;
+            transition: all 0.2s; margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .transcript-box.has-text { color: var(--text); font-style: normal; }
+        .process-btn:hover { background: #ff5520; transform: translateY(-1px); }
+        .process-btn:active { transform: translateY(0); }
+        .process-btn:disabled { background: var(--border); color: var(--muted); transform: none; cursor: default; }
 
-        /* Resultado */
-        .result-box { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-        .result-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+        /* RESULTADO */
+        .result-box {
+            border: 1px solid var(--border); border-radius: 16px;
+            overflow: hidden; opacity: 0.4; transition: opacity 0.3s;
+        }
+        .result-box.ready { opacity: 1; }
+        .result-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 16px; border-bottom: 1px solid var(--border);
+        }
         .result-row:last-child { border-bottom: none; }
-        .result-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .result-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: var(--border); display: flex; align-items: center;
+            justify-content: center; font-size: 16px; flex-shrink: 0;
+        }
         .result-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
         .result-value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
         .result-value.highlight { color: var(--accent2); }
 
-        .spinner { width: 22px; height: 22px; border: 2px solid rgba(255,255,255,0.2); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .status-bar {
+            text-align: center; font-size: 0.82rem;
+            color: var(--muted); margin-bottom: 14px; min-height: 20px;
+            transition: color 0.3s;
+        }
+        .status-bar.thinking { color: var(--accent); }
+        .status-bar.done     { color: var(--success); }
+        .status-bar.error    { color: var(--red); }
 
-        .hint { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 16px; opacity: 0.6; }
+        .spinner {
+            width: 18px; height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white; border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 <div class="card">
     <h1>Pedido <span>por Voz</span></h1>
-    <p class="subtitle">Grave o pedido — a IA transcreve e interpreta</p>
+    <p class="subtitle">Voz nativa do Android + IA interpreta</p>
 
-    <div class="mic-area">
-        <button class="mic-btn" id="btn">🎤</button>
-
-        <div class="wave" id="wave">
-            <span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span>
-        </div>
-
-        <div class="rec-timer hidden" id="recTimer">00:00</div>
-        <div class="status-pill" id="status">Toque para gravar</div>
+    <div class="instruction">
+        <div class="icon">🎙️</div>
+        <p>
+            <strong>Como usar:</strong>
+            Toque no campo abaixo → no teclado, toque no <strong>ícone de microfone 🎤</strong> → fale o pedido → confirme → toque em <strong>Processar</strong>.
+        </p>
     </div>
 
-    <div class="transcript-box" id="transcript">O que você disser aparecerá aqui...</div>
+    <div class="input-wrap">
+        <textarea
+            class="pedido-input"
+            id="pedidoInput"
+            placeholder="Ex: quero duas coca-cola e vou pagar no pix"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            inputmode="text"
+        ></textarea>
+        <button class="clear-btn" id="clearBtn" title="Limpar">✕</button>
+    </div>
 
-    <div class="result-box">
+    <div class="status-bar" id="statusBar"></div>
+
+    <button class="process-btn" id="processBtn" disabled>
+        ✨ Processar Pedido
+    </button>
+
+    <div class="result-box" id="resultBox">
         <div class="result-row">
             <div class="result-icon">🛍️</div>
-            <div><div class="result-label">Produto</div><div class="result-value" id="r-produto">–</div></div>
+            <div>
+                <div class="result-label">Produto</div>
+                <div class="result-value" id="r-produto">–</div>
+            </div>
         </div>
         <div class="result-row">
             <div class="result-icon">🔢</div>
-            <div><div class="result-label">Quantidade</div><div class="result-value highlight" id="r-qtd">–</div></div>
+            <div>
+                <div class="result-label">Quantidade</div>
+                <div class="result-value highlight" id="r-qtd">–</div>
+            </div>
         </div>
         <div class="result-row">
             <div class="result-icon">💳</div>
-            <div><div class="result-label">Pagamento</div><div class="result-value" id="r-pag">–</div></div>
+            <div>
+                <div class="result-label">Pagamento</div>
+                <div class="result-value" id="r-pag">–</div>
+            </div>
         </div>
     </div>
-
-    <p class="hint">Segure para gravar · Toque novamente para parar · Máx 60s</p>
 </div>
 
 <script>
-const btn        = document.getElementById('btn');
-const statusEl   = document.getElementById('status');
-const waveEl     = document.getElementById('wave');
-const timerEl    = document.getElementById('recTimer');
-const transcript = document.getElementById('transcript');
+const input      = document.getElementById('pedidoInput');
+const clearBtn   = document.getElementById('clearBtn');
+const processBtn = document.getElementById('processBtn');
+const statusBar  = document.getElementById('statusBar');
+const resultBox  = document.getElementById('resultBox');
 
-let mediaRecorder = null;
-let audioChunks   = [];
-let gravando      = false;
-let timerIv       = null;
-let totalSecs     = 0;
-const MAX_SECS    = 60;
+// Habilita botão quando há texto
+input.addEventListener('input', () => {
+    const tem = input.value.trim().length > 0;
+    processBtn.disabled = !tem;
+    clearBtn.classList.toggle('visible', tem);
+});
 
-// ── Iniciar gravação ──────────────────────────────────────────
-btn.onclick = () => gravando ? pararGravacao() : iniciarGravacao();
-
-async function iniciarGravacao() {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        audioChunks  = [];
-        gravando     = true;
-
-        // Escolhe o melhor formato suportado
-        const mimeType = getSupportedMime();
-        const options  = mimeType ? { mimeType } : {};
-        mediaRecorder  = new MediaRecorder(stream, options);
-
-        mediaRecorder.ondataavailable = e => {
-            if (e.data && e.data.size > 0) audioChunks.push(e.data);
-        };
-        mediaRecorder.onstop = () => {
-            stream.getTracks().forEach(t => t.stop());
-            processarAudio(mimeType || 'audio/webm');
-        };
-
-        mediaRecorder.start(250); // coleta chunks a cada 250ms
-
-        // UI
-        btn.classList.add('recording');
-        btn.textContent = "⏹";
-        waveEl.classList.add('active');
-        timerEl.classList.remove('hidden');
-        setStatus("🔴 Gravando... toque para parar", "active");
-        totalSecs = 0;
-        atualizarTimer();
-        clearInterval(timerIv);
-        timerIv = setInterval(() => {
-            totalSecs++;
-            atualizarTimer();
-            if (totalSecs >= MAX_SECS) pararGravacao();
-        }, 1000);
-
-    } catch(err) {
-        console.error(err);
-        setStatus("❌ Sem acesso ao microfone", "");
-    }
-}
-
-function pararGravacao() {
-    if (!gravando) return;
-    gravando = false;
-    clearInterval(timerIv);
-    mediaRecorder && mediaRecorder.stop();
-
-    btn.classList.remove('recording');
-    btn.innerHTML = '<div class="spinner"></div>';
-    btn.classList.add('loading');
-    waveEl.classList.remove('active');
-    setStatus("⚙️ Transcrevendo áudio...", "thinking");
-}
-
-function atualizarTimer() {
-    const m = String(Math.floor(totalSecs/60)).padStart(2,'0');
-    const s = String(totalSecs%60).padStart(2,'0');
-    timerEl.textContent = `${m}:${s}`;
-}
-
-// ── Escolhe MIME suportado pelo device ────────────────────────
-function getSupportedMime() {
-    const candidatos = [
-        'audio/webm;codecs=opus',
-        'audio/webm',
-        'audio/ogg;codecs=opus',
-        'audio/ogg',
-        'audio/mp4',
-    ];
-    for (const m of candidatos) {
-        if (MediaRecorder.isTypeSupported(m)) return m;
-    }
-    return null;
-}
-
-// ── Converte blob para base64 ─────────────────────────────────
-function blobParaBase64(blob) {
-    return new Promise((res, rej) => {
-        const reader = new FileReader();
-        reader.onloadend = () => res(reader.result.split(',')[1]);
-        reader.onerror  = rej;
-        reader.readAsDataURL(blob);
+// Limpar campo
+clearBtn.onclick = () => {
+    input.value = '';
+    processBtn.disabled = true;
+    clearBtn.classList.remove('visible');
+    statusBar.textContent = '';
+    statusBar.className = 'status-bar';
+    resultBox.classList.remove('ready');
+    ['r-produto','r-qtd','r-pag'].forEach(id => {
+        document.getElementById(id).textContent = '–';
     });
-}
+    input.focus();
+};
 
-// ── Processa áudio com a API da Anthropic ────────────────────
-async function processarAudio(mimeType) {
+// Processar
+processBtn.onclick = () => {
+    const texto = input.value.trim();
+    if (!texto) return;
+    processarComIA(texto);
+};
+
+// Enter no teclado virtual também processa
+input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (!processBtn.disabled) processBtn.click();
+    }
+});
+
+async function processarComIA(texto) {
+    processBtn.disabled = true;
+    processBtn.innerHTML = '<div class="spinner"></div> Processando...';
+    setStatus("⚙️ Interpretando o pedido...", "thinking");
+
+    const prompt = `Você é um assistente de lanchonete/comércio.
+Analise este pedido e extraia as informações principais.
+O texto pode ter erros de digitação ou reconhecimento de voz — interprete a intenção real.
+
+Pedido: "${texto}"
+
+Responda APENAS com JSON válido, sem markdown, sem explicação:
+{"produto":"nome do produto (ou Não identificado)","quantidade":número inteiro,"pagamento":"cartão | pix | dinheiro | débito | crédito | Não informado"}`;
+
     try {
-        const blob   = new Blob(audioChunks, { type: mimeType });
-        const base64 = await blobParaBase64(blob);
-
-        // Mapeia para media_type aceito pela API
-        const mediaTypeMap = {
-            'audio/webm;codecs=opus': 'audio/webm',
-            'audio/webm':             'audio/webm',
-            'audio/ogg;codecs=opus':  'audio/ogg',
-            'audio/ogg':              'audio/ogg',
-            'audio/mp4':              'audio/mp4',
-        };
-        const apiMediaType = mediaTypeMap[mimeType] || 'audio/webm';
-
         const resp = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 model: "claude-sonnet-4-20250514",
-                max_tokens: 300,
-                messages: [{
-                    role: "user",
-                    content: [
-                        {
-                            type: "text",
-                            text: `Você é um assistente de lanchonete/comércio.
-Primeiro, transcreva exatamente o que foi dito neste áudio em português.
-Depois, extraia produto, quantidade e forma de pagamento.
-
-Responda APENAS com este JSON (sem markdown, sem explicação):
-{
-  "transcricao": "texto exato do que foi dito",
-  "produto": "nome do produto (ou Não identificado)",
-  "quantidade": número inteiro,
-  "pagamento": "cartão | pix | dinheiro | débito | crédito | Não informado"
-}`
-                        },
-                        {
-                            type: "document",
-                            source: {
-                                type: "base64",
-                                media_type: apiMediaType,
-                                data: base64
-                            }
-                        }
-                    ]
-                }]
+                max_tokens: 150,
+                messages: [{ role: "user", content: prompt }]
             })
         });
 
         const data   = await resp.json();
-
-        // Verifica erro da API
-        if (data.error) throw new Error(data.error.message || "Erro API");
+        if (data.error) throw new Error(data.error.message);
 
         const raw    = (data.content?.[0]?.text || "{}").replace(/```json|```/g,"").trim();
         const parsed = JSON.parse(raw);
 
-        transcript.textContent = parsed.transcricao || "(sem transcrição)";
-        transcript.classList.add('has-text');
-
         document.getElementById('r-produto').textContent = parsed.produto    || "Não identificado";
         document.getElementById('r-qtd').textContent     = parsed.quantidade ?? 1;
         document.getElementById('r-pag').textContent     = parsed.pagamento  || "Não informado";
-        setStatus("✅ Pedido processado!", "done");
+
+        resultBox.classList.add('ready');
+        setStatus("✅ Pedido processado com sucesso!", "done");
 
     } catch(err) {
-        console.error("Erro ao processar áudio:", err);
-        transcript.textContent = "Erro ao processar. Tente novamente.";
-        setStatus("❌ Erro — tente novamente", "");
+        console.error(err);
+        setStatus("❌ Erro ao processar. Tente novamente.", "error");
     }
 
-    btn.classList.remove('loading');
-    btn.textContent = "🎤";
-    timerEl.classList.add('hidden');
+    processBtn.disabled = false;
+    processBtn.innerHTML = '✨ Processar Pedido';
 }
 
 function setStatus(msg, cls) {
-    statusEl.textContent = msg;
-    statusEl.className   = 'status-pill' + (cls ? ' '+cls : '');
+    statusBar.textContent = msg;
+    statusBar.className   = 'status-bar' + (cls ? ' '+cls : '');
 }
 </script>
 </body>
