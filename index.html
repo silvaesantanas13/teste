@@ -10,19 +10,20 @@
             --bg: #0f0f13; --card: #1a1a22; --accent: #ff6b35;
             --accent2: #ffd166; --text: #f0ede8; --muted: #888;
             --border: #2a2a35; --success: #06d6a0; --red: #ef233c;
+            --card2: #20202a;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'DM Sans', sans-serif;
             background: var(--bg); color: var(--text);
             min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: flex-start; justify-content: center;
             padding: 20px;
         }
         .card {
             background: var(--card); border: 1px solid var(--border);
             border-radius: 24px; width: 100%; max-width: 390px;
-            padding: 32px 24px; position: relative; overflow: hidden;
+            padding: 28px 22px; position: relative; overflow: hidden;
         }
         .card::before {
             content: ''; position: absolute; top: -60px; right: -60px;
@@ -30,20 +31,22 @@
             background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
             pointer-events: none;
         }
-        h1 { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px; }
+        h1 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 2px; }
         h1 span { color: var(--accent); }
-        .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
+        .subtitle { color: var(--muted); font-size: 0.82rem; margin-bottom: 20px; }
 
+        /* INSTRUÇÃO */
         .instruction {
-            display: flex; align-items: flex-start; gap: 12px;
+            display: flex; align-items: flex-start; gap: 10px;
             background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.2);
-            border-radius: 12px; padding: 14px; margin-bottom: 22px;
+            border-radius: 12px; padding: 12px; margin-bottom: 18px;
         }
-        .instruction .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
-        .instruction p { font-size: 0.83rem; color: var(--accent2); line-height: 1.6; }
-        .instruction strong { display: block; margin-bottom: 3px; font-size: 0.88rem; }
+        .instruction .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+        .instruction p { font-size: 0.8rem; color: var(--accent2); line-height: 1.55; }
+        .instruction strong { display: block; margin-bottom: 2px; }
 
-        .input-wrap { position: relative; margin-bottom: 14px; }
+        /* CAMPO INPUT */
+        .input-wrap { position: relative; margin-bottom: 12px; }
         .pedido-input {
             width: 100%;
             background: rgba(255,255,255,0.04);
@@ -51,111 +54,235 @@
             border-radius: 14px;
             color: var(--text);
             font-family: 'DM Sans', sans-serif;
-            font-size: 1.05rem;
-            padding: 16px 48px 16px 16px;
-            resize: none; outline: none; line-height: 1.5;
-            min-height: 80px;
+            font-size: 1rem; padding: 14px 44px 14px 14px;
+            resize: none; outline: none; line-height: 1.5; min-height: 74px;
             transition: border-color 0.2s;
         }
-        .pedido-input::placeholder { color: var(--muted); font-size: 0.92rem; }
+        .pedido-input::placeholder { color: var(--muted); font-size: 0.88rem; }
         .pedido-input:focus { border-color: var(--accent); }
-
         .clear-btn {
-            position: absolute; top: 10px; right: 10px;
-            background: var(--border); border: none; border-radius: 8px;
-            color: var(--muted); font-size: 0.78rem;
-            padding: 5px 8px; cursor: pointer; display: none;
+            position: absolute; top: 9px; right: 9px;
+            background: var(--border); border: none; border-radius: 7px;
+            color: var(--muted); font-size: 0.75rem;
+            padding: 4px 7px; cursor: pointer; display: none;
         }
         .clear-btn.visible { display: block; }
 
+        /* BOTÃO PROCESSAR */
         .process-btn {
-            width: 100%; padding: 16px;
+            width: 100%; padding: 15px;
             background: var(--accent); border: none; border-radius: 14px;
             color: white; font-family: 'Syne', sans-serif;
-            font-size: 1rem; font-weight: 700; letter-spacing: 0.02em;
-            cursor: pointer; transition: all 0.2s; margin-bottom: 20px;
+            font-size: 0.97rem; font-weight: 700; letter-spacing: 0.02em;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 18px;
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
         .process-btn:hover:not(:disabled) { background: #ff5520; transform: translateY(-1px); }
-        .process-btn:disabled { background: var(--border); color: var(--muted); cursor: default; }
+        .process-btn:disabled { background: var(--border); color: var(--muted); cursor: default; transform: none; }
 
         .status-bar {
-            text-align: center; font-size: 0.82rem; color: var(--muted);
-            margin-bottom: 14px; min-height: 20px; transition: color 0.3s;
+            text-align: center; font-size: 0.8rem; color: var(--muted);
+            margin-bottom: 12px; min-height: 18px; transition: color 0.3s;
         }
         .status-bar.done  { color: var(--success); }
         .status-bar.error { color: var(--red); }
 
+        /* RESULTADO */
+        .result-section { display: none; }
+        .result-section.visible { display: block; }
+
+        .section-title {
+            font-family: 'Syne', sans-serif; font-size: 0.72rem;
+            font-weight: 700; color: var(--muted); text-transform: uppercase;
+            letter-spacing: 0.1em; margin-bottom: 8px; padding-left: 2px;
+        }
+
         .result-box {
             border: 1px solid var(--border); border-radius: 16px;
-            overflow: hidden; transition: opacity 0.3s; opacity: 0.35;
+            overflow: hidden; margin-bottom: 12px;
         }
-        .result-box.ready { opacity: 1; }
-
         .result-row {
             display: flex; align-items: center; gap: 12px;
-            padding: 14px 16px; border-bottom: 1px solid var(--border);
-            transition: background 0.2s;
+            padding: 12px 14px; border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
         .result-row:last-child { border-bottom: none; }
         .result-row.updated { background: rgba(255,107,53,0.07); }
-
-        .result-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-        .result-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
-        .result-value { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .result-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+        .result-label { font-size: 0.69rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1px; }
+        .result-value { font-size: 0.92rem; font-weight: 600; color: var(--text); word-break: break-word; }
         .result-value.highlight { color: var(--accent2); }
+        .result-value.pag-pix    { color: #5bc8ff; }
+        .result-value.pag-dinheiro { color: var(--success); }
+        .result-value.pag-cartao  { color: #c084fc; }
+
+        /* TROCO */
+        .troco-row { display: none; }
+        .troco-row.visible { display: flex; }
+
+        /* SEÇÃO ADICIONAR MAIS */
+        .add-section {
+            background: var(--card2); border: 1px solid var(--border);
+            border-radius: 16px; padding: 16px; margin-bottom: 0;
+        }
+        .add-section .section-title { margin-bottom: 10px; }
+
+        /* Lista de itens */
+        .itens-list { margin-bottom: 12px; display: none; }
+        .itens-list.visible { display: block; }
+        .item-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,107,53,0.12); border: 1px solid rgba(255,107,53,0.25);
+            border-radius: 20px; padding: 4px 10px 4px 10px;
+            font-size: 0.8rem; color: var(--accent2);
+            margin: 3px 3px 3px 0;
+        }
+        .item-tag button {
+            background: none; border: none; color: var(--muted);
+            font-size: 0.7rem; cursor: pointer; padding: 0; line-height: 1;
+        }
+        .item-tag button:hover { color: var(--red); }
+
+        /* Input de adição */
+        .add-input-wrap { position: relative; margin-bottom: 10px; }
+        .add-input {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border); border-radius: 12px;
+            color: var(--text); font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem; padding: 11px 40px 11px 12px;
+            outline: none; transition: border-color 0.2s;
+        }
+        .add-input::placeholder { color: var(--muted); font-size: 0.85rem; }
+        .add-input:focus { border-color: var(--accent); }
+
+        .add-btn {
+            width: 100%; padding: 12px;
+            background: rgba(255,107,53,0.15); border: 1px solid rgba(255,107,53,0.3);
+            border-radius: 12px; color: var(--accent);
+            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 12px;
+        }
+        .add-btn:hover:not(:disabled) { background: rgba(255,107,53,0.25); }
+        .add-btn:disabled { opacity: 0.4; cursor: default; }
+
+        /* Observação */
+        .obs-input {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border); border-radius: 12px;
+            color: var(--text); font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem; padding: 11px 12px;
+            outline: none; resize: none; min-height: 60px; line-height: 1.5;
+            transition: border-color 0.2s;
+        }
+        .obs-input::placeholder { color: var(--muted); font-size: 0.85rem; }
+        .obs-input:focus { border-color: var(--border); }
+
+        .obs-label {
+            font-size: 0.72rem; color: var(--muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 6px; display: block;
+        }
+
+        /* Divider */
+        .divider { height: 1px; background: var(--border); margin: 14px 0; }
     </style>
 </head>
 <body>
 <div class="card">
     <h1>Pedido <span>por Voz</span></h1>
-    <p class="subtitle">Fale pelo teclado · a IA interpreta na hora</p>
+    <p class="subtitle">Microfone nativo do Android · processamento local</p>
 
     <div class="instruction">
         <div class="icon">🎙️</div>
         <p>
             <strong>Como usar:</strong>
-            Toque no campo → no teclado toque no <strong>microfone 🎤</strong> → fale o pedido → confirme → toque em <strong>Processar</strong>.
+            Toque no campo → no teclado toque no <strong>🎤 microfone</strong> → fale o pedido → confirme → toque em <strong>Processar</strong>.
         </p>
     </div>
 
+    <!-- CAMPO PRINCIPAL -->
     <div class="input-wrap">
         <textarea
-            class="pedido-input"
-            id="pedidoInput"
-            placeholder="Ex: duas coca-cola gelada no pix&#10;ou: 3 salgados e um suco no cartão"
+            class="pedido-input" id="pedidoInput"
+            placeholder="Ex: duas coca-cola gelada pagando no pix&#10;Ex: 3 coxinhas troco pra cem reais"
             autocomplete="off" autocorrect="off" spellcheck="false"
         ></textarea>
         <button class="clear-btn" id="clearBtn">✕</button>
     </div>
 
     <div class="status-bar" id="statusBar"></div>
-
     <button class="process-btn" id="processBtn" disabled>✨ Processar Pedido</button>
 
-    <div class="result-box" id="resultBox">
-        <div class="result-row" id="row-produto">
-            <div class="result-icon">🛍️</div>
-            <div><div class="result-label">Produto</div><div class="result-value" id="r-produto">–</div></div>
+    <!-- RESULTADO -->
+    <div class="result-section" id="resultSection">
+        <div class="section-title">📋 Resumo do Pedido</div>
+
+        <div class="result-box">
+            <div class="result-row" id="row-produto">
+                <div class="result-icon">🛍️</div>
+                <div><div class="result-label">Produto</div><div class="result-value" id="r-produto">–</div></div>
+            </div>
+            <div class="result-row" id="row-qtd">
+                <div class="result-icon">🔢</div>
+                <div><div class="result-label">Quantidade</div><div class="result-value highlight" id="r-qtd">–</div></div>
+            </div>
+            <div class="result-row" id="row-pag">
+                <div class="result-icon">💳</div>
+                <div><div class="result-label">Pagamento</div><div class="result-value" id="r-pag">–</div></div>
+            </div>
+            <!-- TROCO (aparece só se dinheiro) -->
+            <div class="result-row troco-row" id="row-troco">
+                <div class="result-icon">💵</div>
+                <div><div class="result-label">Troco para</div><div class="result-value highlight" id="r-troco">–</div></div>
+            </div>
         </div>
-        <div class="result-row" id="row-qtd">
-            <div class="result-icon">🔢</div>
-            <div><div class="result-label">Quantidade</div><div class="result-value highlight" id="r-qtd">–</div></div>
-        </div>
-        <div class="result-row" id="row-pag">
-            <div class="result-icon">💳</div>
-            <div><div class="result-label">Pagamento</div><div class="result-value" id="r-pag">–</div></div>
+
+        <!-- SEÇÃO ADICIONAR MAIS / OBSERVAÇÕES -->
+        <div class="add-section">
+            <div class="section-title">➕ Adicionar ao Pedido</div>
+
+            <!-- Itens já adicionados -->
+            <div class="itens-list" id="itensList"></div>
+
+            <!-- Input para adicionar item por voz/texto -->
+            <div class="add-input-wrap">
+                <input
+                    class="add-input" id="addInput" type="text"
+                    placeholder="🎤 Fale ou digite mais um item..."
+                    autocomplete="off" autocorrect="off" spellcheck="false"
+                />
+            </div>
+            <button class="add-btn" id="addBtn" disabled>+ Adicionar item</button>
+
+            <div class="divider"></div>
+
+            <!-- Observação -->
+            <label class="obs-label" for="obsInput">📝 Observação</label>
+            <textarea
+                class="obs-input" id="obsInput"
+                placeholder="🎤 Fale ou digite uma observação... Ex: sem cebola, bem passado, para viagem"
+                autocomplete="off" autocorrect="off" spellcheck="false"
+            ></textarea>
         </div>
     </div>
 </div>
 
 <script>
+// ── Elementos ──────────────────────────────────────────────────
 const input      = document.getElementById('pedidoInput');
 const clearBtn   = document.getElementById('clearBtn');
 const processBtn = document.getElementById('processBtn');
 const statusBar  = document.getElementById('statusBar');
-const resultBox  = document.getElementById('resultBox');
+const resultSec  = document.getElementById('resultSection');
+const addInput   = document.getElementById('addInput');
+const addBtn     = document.getElementById('addBtn');
+const itensList  = document.getElementById('itensList');
+const trocoRow   = document.getElementById('row-troco');
 
+let itensExtras = [];
+
+// ── Input principal ────────────────────────────────────────────
 input.addEventListener('input', () => {
     const tem = input.value.trim().length > 0;
     processBtn.disabled = !tem;
@@ -168,9 +295,9 @@ clearBtn.onclick = () => {
     clearBtn.classList.remove('visible');
     statusBar.textContent = '';
     statusBar.className = 'status-bar';
-    resultBox.classList.remove('ready');
-    ['r-produto','r-qtd','r-pag'].forEach(id => document.getElementById(id).textContent = '–');
-    ['row-produto','row-qtd','row-pag'].forEach(id => document.getElementById(id).classList.remove('updated'));
+    resultSec.classList.remove('visible');
+    itensExtras = [];
+    renderItens();
     input.focus();
 };
 
@@ -184,25 +311,86 @@ processBtn.onclick = () => {
     processar(texto);
 };
 
-// ─────────────────────────────────────────────────────────────
-// PROCESSAMENTO LOCAL — sem API externa, funciona offline
-// ─────────────────────────────────────────────────────────────
+// ── Input adicionar item ───────────────────────────────────────
+addInput.addEventListener('input', () => {
+    addBtn.disabled = addInput.value.trim().length === 0;
+});
+addInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); if (!addBtn.disabled) addBtn.click(); }
+});
+addBtn.onclick = () => {
+    const val = addInput.value.trim();
+    if (!val) return;
+    const parsed = parsarItemExtra(normalizar(val));
+    itensExtras.push(parsed);
+    renderItens();
+    addInput.value = '';
+    addBtn.disabled = true;
+};
+
+function renderItens() {
+    if (itensExtras.length === 0) {
+        itensList.classList.remove('visible');
+        itensList.innerHTML = '';
+        return;
+    }
+    itensList.classList.add('visible');
+    itensList.innerHTML = itensExtras.map((item, i) =>
+        `<span class="item-tag">
+            ${item.qtd > 1 ? item.qtd + 'x ' : ''}${item.produto}
+            <button onclick="removerItem(${i})">✕</button>
+        </span>`
+    ).join('');
+}
+
+function removerItem(i) {
+    itensExtras.splice(i, 1);
+    renderItens();
+}
+
+// ── PROCESSAMENTO LOCAL ────────────────────────────────────────
 function processar(raw) {
     const t = normalizar(raw);
 
     const qtd     = extrairQuantidade(t);
     const pag     = extrairPagamento(t);
-    const produto = extrairProduto(t, qtd, pag);
+    const troco   = extrairTroco(t);
+    const produto = extrairProduto(t, qtd, pag, troco);
 
+    // Produto
     setValor('r-produto', capitalizar(produto) || 'Não identificado', 'row-produto');
-    setValor('r-qtd',     String(qtd),                                 'row-qtd');
-    setValor('r-pag',     capitalizar(pag) || 'Não informado',         'row-pag');
+    // Quantidade
+    setValor('r-qtd', String(qtd), 'row-qtd');
+    // Pagamento com cor
+    const pagEl = document.getElementById('r-pag');
+    pagEl.textContent = pag || 'Não informado';
+    pagEl.className = 'result-value ' + corPag(pag);
+    document.getElementById('row-pag').classList.add('updated');
 
-    resultBox.classList.add('ready');
+    // Troco
+    if (troco && pag && pag.toLowerCase() === 'dinheiro') {
+        document.getElementById('r-troco').textContent = `R$ ${troco}`;
+        trocoRow.classList.add('visible');
+        document.getElementById('row-troco').classList.add('updated');
+    } else {
+        trocoRow.classList.remove('visible');
+    }
+
+    resultSec.classList.add('visible');
     setStatus('✅ Pedido processado!', 'done');
+
+    // Scroll suave para o resultado
+    setTimeout(() => resultSec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
 }
 
-/* ── Normaliza: minúsculo, sem acento, espaços limpos ── */
+function parsarItemExtra(t) {
+    return {
+        qtd: extrairQuantidade(t),
+        produto: capitalizar(extrairProduto(t, extrairQuantidade(t), null, null)) || t
+    };
+}
+
+/* Normaliza: minúsculo, sem acento, pontuação vira espaço */
 function normalizar(txt) {
     return txt
         .toLowerCase()
@@ -212,93 +400,105 @@ function normalizar(txt) {
         .trim();
 }
 
-/* ── Quantidade ── */
+/* Quantidade */
 function extrairQuantidade(t) {
-    // Números escritos por extenso
     const extenso = {
-        'um': 1, 'uma': 1, 'hum': 1,
-        'dois': 2, 'duas': 2,
-        'tres': 3, 'trez': 3,
-        'quatro': 4,
-        'cinco': 5,
-        'seis': 6,
-        'sete': 7,
-        'oito': 8,
-        'nove': 9,
-        'dez': 10,
+        'um':1,'uma':1,'hum':1,'dois':2,'duas':2,
+        'tres':3,'trez':3,'quatro':4,'cinco':5,
+        'seis':6,'sete':7,'oito':8,'nove':9,'dez':10
     };
-
-    // Número dígito: "2 coca", "10 coxinhas"
-    const mDigito = t.match(/\b(\d+)\b/);
-    if (mDigito) return parseInt(mDigito[1]);
-
-    // Por extenso
-    for (const [palavra, valor] of Object.entries(extenso)) {
-        const re = new RegExp(`\\b${palavra}\\b`);
-        if (re.test(t)) return valor;
+    const mD = t.match(/\b(\d+)\b/);
+    if (mD) return parseInt(mD[1]);
+    for (const [p, v] of Object.entries(extenso)) {
+        if (new RegExp(`\\b${p}\\b`).test(t)) return v;
     }
-
     return 1;
 }
 
-/* ── Pagamento ── */
+/* Pagamento — inclui variações de "pix" como "pics", "pique", etc. */
 function extrairPagamento(t) {
-    const formas = [
-        { re: /\b(cartao de credito|credito)\b/, label: 'Crédito' },
-        { re: /\b(cartao de debito|debito)\b/,   label: 'Débito' },
-        { re: /\b(cartao)\b/,                     label: 'Cartão' },
-        { re: /\b(pix)\b/,                        label: 'Pix' },
-        { re: /\b(dinheiro|especie|vista)\b/,      label: 'Dinheiro' },
-        { re: /\b(vale refeicao|vr|vale)\b/,       label: 'Vale refeição' },
-    ];
-    for (const { re, label } of formas) {
-        if (re.test(t)) return label;
+    // Pix primeiro (várias grafias por reconhecimento de voz)
+    if (/\b(pix|pics|pique|pixe|pis|pich|pich|pixs|piss)\b/.test(t)) return 'Pix';
+    if (/\bcredito\b/.test(t)) return 'Crédito';
+    if (/\bdebito\b/.test(t))  return 'Débito';
+    if (/\bcartao\b/.test(t))  return 'Cartão';
+    if (/\b(dinheiro|especie|vista|nota|cedula)\b/.test(t)) return 'Dinheiro';
+    if (/\b(vale refeicao|vale refeição|vr|vale)\b/.test(t)) return 'Vale refeição';
+    return null;
+}
+
+/* Troco: "troco pra cem", "troco de 50", "cinquenta reais" */
+function extrairTroco(t) {
+    // "troco pra/para/de X" ou "troco X"
+    const mTroco = t.match(/troco\s+(?:pra|para|de|com)?\s*(\d+)/);
+    if (mTroco) return mTroco[1];
+
+    // Valores por extenso comuns
+    const valoresExtenso = {
+        'dez reais': '10,00', 'vinte reais': '20,00', 'trinta reais': '30,00',
+        'quarenta reais': '40,00', 'cinquenta reais': '50,00',
+        'sessenta reais': '60,00', 'setenta reais': '70,00',
+        'oitenta reais': '80,00', 'noventa reais': '90,00',
+        'cem reais': '100,00', 'cento reais': '100,00',
+        'duzentos reais': '200,00',
+    };
+    for (const [k, v] of Object.entries(valoresExtenso)) {
+        if (t.includes(k)) return v;
     }
     return null;
 }
 
-/* ── Produto: remove palavras de quantidade, pagamento e verbos ── */
-function extrairProduto(t, qtd, pag) {
+/* Produto: remove tudo que não é produto */
+function extrairProduto(t, qtd, pag, troco) {
+    let s = t;
+
     // Remove número dígito
-    let s = t.replace(/\b\d+\b/g, '');
+    s = s.replace(/\b\d+\b/g, '');
 
-    // Remove extenso do número encontrado
+    // Remove extenso do número
     const extensoMap = {
-        1: ['um','uma','hum'], 2: ['dois','duas'], 3: ['tres','trez'],
-        4: ['quatro'], 5: ['cinco'], 6: ['seis'], 7: ['sete'],
-        8: ['oito'], 9: ['nove'], 10: ['dez'],
+        1:['um','uma','hum'], 2:['dois','duas'], 3:['tres','trez'],
+        4:['quatro'], 5:['cinco'], 6:['seis'], 7:['sete'],
+        8:['oito'], 9:['nove'], 10:['dez']
     };
-    if (extensoMap[qtd]) {
-        extensoMap[qtd].forEach(p => {
-            s = s.replace(new RegExp(`\\b${p}\\b`, 'g'), '');
-        });
-    }
+    if (extensoMap[qtd]) extensoMap[qtd].forEach(p => {
+        s = s.replace(new RegExp(`\\b${p}\\b`, 'g'), '');
+    });
 
-    // Remove forma de pagamento
-    if (pag) {
-        const pagNorm = normalizar(pag);
-        s = s.replace(new RegExp(`\\b${pagNorm}\\b`, 'g'), '');
-        // variantes comuns
-        s = s.replace(/\b(cartao|cartao de credito|cartao de debito|credito|debito|pix|dinheiro|especie|vista|vale refeicao|vr|vale)\b/g, '');
-    }
+    // Remove pagamento e variações
+    s = s.replace(/\b(pix|pics|pique|pixe|pis|pich|pixs|piss|credito|debito|cartao|dinheiro|especie|vista|vale refeicao|vr|vale)\b/g, '');
 
-    // Remove palavras funcionais e verbos de pedido
-    const lixo = [
-        'quero','queria','me da','me de','me traz','traz','traga','pode trazer',
+    // Remove troco e valores monetários
+    s = s.replace(/\btroco\b.*$/g, '');
+    s = s.replace(/\b(reais|real|r\$)\b/g, '');
+    s = s.replace(/\b(cem|cinquenta|vinte|trinta|quarenta|sessenta|setenta|oitenta|noventa|duzentos|cento)\b/g, '');
+
+    // Remove conectores, verbos, preposições
+    const stopWords = [
+        'quero','queria','me da','me de','me traz','traz','traga',
         'por favor','pfv','pf','obrigado','obrigada',
-        'um','uma','umas','uns',
         'no','na','nos','nas','pelo','pela','com','sem','de','do','da','dos','das',
-        'e','ou','mais','ja','ai','la','aqui','ali','isso','esse','essa','aquele',
-        'favor','gentileza','preciso','precisa','gostaria','gosta',
-        'pagar','pagamento','pago',
-        'gelad[ao]','gelada','geladinha','bem','frio','fria',
+        'e','ou','mais','ja','ai','la','aqui','ali',
+        'favor','preciso','gostaria',
+        'pagar','pagamento','pago','paga','pagando','pago','pague',
         'por','para','pra','pro',
+        'gelado','gelada','geladinha','geladinho','bem','frio','fria',
+        'um','uma','umas','uns',
     ];
-    lixo.forEach(p => {
+    stopWords.forEach(p => {
         s = s.replace(new RegExp(`\\b${p}\\b`, 'g'), '');
     });
 
     return s.replace(/\s+/g, ' ').trim();
+}
+
+function corPag(pag) {
+    if (!pag) return '';
+    const p = pag.toLowerCase();
+    if (p === 'pix') return 'pag-pix';
+    if (p === 'dinheiro') return 'pag-dinheiro';
+    if (['cartão','crédito','débito'].includes(p)) return 'pag-cartao';
+    return '';
 }
 
 function capitalizar(str) {
@@ -307,10 +507,8 @@ function capitalizar(str) {
 }
 
 function setValor(id, valor, rowId) {
-    const el  = document.getElementById(id);
-    const row = document.getElementById(rowId);
-    el.textContent = valor;
-    row.classList.add('updated');
+    document.getElementById(id).textContent = valor;
+    document.getElementById(rowId).classList.add('updated');
 }
 
 function setStatus(msg, cls) {
